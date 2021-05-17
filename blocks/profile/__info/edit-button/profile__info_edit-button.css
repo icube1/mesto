@@ -1,0 +1,14 @@
+.profile__info_edit-button {
+  background-image: url(../../../../images/profile__info_edit-button.svg);
+  width: 24px;
+  height: 24px;
+  padding: 7px;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid white;
+  position: absolute;
+  right: 0;
+  top: 15px;
+  cursor: pointer;
+}

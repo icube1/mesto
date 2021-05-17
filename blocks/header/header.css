@@ -1,0 +1,7 @@
+.header {
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  max-width: 880px;
+  min-height: 74px;
+  border-bottom: 1px solid #545454;
+  margin: 45px auto 40px;
+}

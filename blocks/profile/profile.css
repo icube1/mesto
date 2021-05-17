@@ -1,0 +1,9 @@
+.profile {
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  margin-bottom: 51px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
