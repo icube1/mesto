@@ -1,0 +1,8 @@
+.element {
+  background-color: #fff;
+  max-width: 282px;
+  min-height: 361px;
+  color: black;
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  border-radius: 10px;
+}
