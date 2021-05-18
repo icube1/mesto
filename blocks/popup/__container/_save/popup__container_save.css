@@ -1,0 +1,13 @@
+.popup__container_save {
+  border: none;
+  outline: none;
+  color: white;
+  background-color: black;
+  min-height: 50px;
+  max-width: 358px;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'Inter', ‘Arial’, sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+}
