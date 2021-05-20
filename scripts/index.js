@@ -3,7 +3,6 @@ let popup = document.querySelector('.popup');
 let closePopup = document.querySelector('.popup__container_close');
 let profile = document.querySelector('.profile')
 let formElement = popup.querySelector('.popup__container_form')
-
 let profileName = profile.querySelector('.profile__info_name').textContent;
 let nameInput = popup.querySelector('.popup__container_name');
 
