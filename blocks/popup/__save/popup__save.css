@@ -1,4 +1,4 @@
-.popup__container_save {
+.popup__save {
   border: none;
   outline: none;
   color: white;
@@ -14,7 +14,7 @@
   transition: opacity .3s ease;
 }
 
-.popup__container_save:hover {
+.popup__save:hover {
   opacity: .8;
 }
 

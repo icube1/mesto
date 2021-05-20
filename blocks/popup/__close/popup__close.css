@@ -1,4 +1,4 @@
-.popup__container_close {
+.popup__close {
   border: none;
   outline: none;
   position: absolute;
@@ -6,7 +6,7 @@
   top: -40px;
   width: 40px;
   height: 40px;
-  background-image: url(../../../../images/popup__container_close.svg);
+  background-image: url(../../../images/popup__close.svg);
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,12 +14,12 @@
   transition: opacity .3s ease;
 }
 
-.popup__container_close:hover {
+.popup__close:hover {
   opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
-  .popup__container_close {
+  .popup__close {
     right: 0;
     top: -50px;
   }
