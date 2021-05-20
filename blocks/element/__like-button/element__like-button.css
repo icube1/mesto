@@ -5,8 +5,15 @@
   outline: none;
   width: 22px;
   height: 19px;
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.element__like-button:hover {
+  opacity: .5;
 }
 
 .element__like-button:active {
+  opacity: 1;
   background-image: url(../../../images/like-button_active.png);
 }

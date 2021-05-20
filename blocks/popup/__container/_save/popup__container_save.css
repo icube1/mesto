@@ -10,4 +10,11 @@
   font-family: 'Inter', ‘Arial’, sans-serif;
   font-size: 18px;
   line-height: 22px;
+  cursor: pointer;
+  transition: opacity .3s ease;
 }
+
+.popup__container_save:hover {
+  opacity: .8;
+}
+

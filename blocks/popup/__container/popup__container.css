@@ -9,3 +9,11 @@
   flex-direction: column;
   padding: 34px 36px 37px;
 }
+
+@media screen and (max-width: 767px) {
+  .popup__container {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
+}
+

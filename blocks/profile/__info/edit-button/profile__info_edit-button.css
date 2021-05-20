@@ -9,6 +9,11 @@
   border: 1px solid white;
   margin-left: 18px;
   cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.profile__info_edit-button:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 767px) {
