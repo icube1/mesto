@@ -1,4 +1,4 @@
-.popup__container_title {
+.popup__title {
   font-family: 'Inter', ‘Arial’, sans-serif;
   font-size: 24px;
   line-height: 29px;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .popup__container_title {
+  .popup__title {
     text-align: center;
   }
 }

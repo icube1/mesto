@@ -1,4 +1,4 @@
-.profile__info_name-container {
+.profile__name-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 767px) {
-  .profile__info_name-container {
+  .profile__name-container {
     justify-content: center;
     align-items: center;
   }
