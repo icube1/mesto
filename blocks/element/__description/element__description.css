@@ -1,6 +1,7 @@
 .element__description {
   padding: 25px 15px 31px 21px;
-  display: flex; flex-direction: row;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
