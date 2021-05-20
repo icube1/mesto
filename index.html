@@ -11,63 +11,65 @@
 
 <body class="page">
   <header class="header">
-    <img src="./images/header__logo.svg" alt="" class="logo">
+    <img src="./images/header__logo.svg" alt="" class="header__logo">
   </header>
 
   <main class="main">
     <section class="profile">
       <img src="./images/profile__avatar.jpg" alt="Аватар пользователя" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__info_name">Жак-Ив Кусто</h1>
-        <button type="button" class="profile__info_edit-button"></button>
+        <div class="profile__info_name-container">
+          <h1 class="profile__info_name">Жак-Ив Кусто</h1>
+          <button type="button" class="profile__info_edit-button"></button>
+        </div>
         <p class="profile__info_description">Исследователь океана</p>
       </div>
       <button type="button" class="profile__add-card"></button>
     </section>
-    <ul class="elements">
-      <li class="element">
+    <section class="elements">
+      <div class="element">
         <img src="./images/element__image-1.webp" alt="Карачаевск" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Карачаевск</h2>
           <button type="button" class="element__like-button"></button>
         </div>
-      </li>
-      <li class="element">
+      </div>
+      <div class="element">
         <img src="./images/element__image-2.webp" alt="Гора Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Гора Эльбрус</h2>
           <button type="button" class="element__like-button"></button>
         </div>
-      </li>
-      <li class="element">
+      </div>
+      <div class="element">
         <img src="./images/element__image-3.webp" alt="Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Эльбрус</h2>
           <button type="button" class="element__like-button"></button>
         </div>
-      </li>
-      <li class="element">
+      </div>
+      <div class="element">
         <img src="./images/element__image-1.webp" alt="Карачаевск" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Карачаевск</h2>
           <button type="button" class="element__like-button"></button>
         </div>
-      </li>
-      <li class="element">
+      </div>
+      <div class="element">
         <img src="./images/element__image-2.webp" alt="Гора Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Гора Эльбрус</h2>
           <button type="button" class="element__like-button"></button>
         </div>
-      </li>
-      <li class="element">
+      </div>
+      <div class="element">
         <img src="./images/element__image-3.webp" alt="Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Эльбрус</h2>
           <button type="button" class="element__like-button"></button>
         </div>
-      </li>
-    </ul>
+      </div>
+    </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
@@ -77,8 +79,8 @@
     <div class="popup__container">
       <h2 class="popup__container_title">Редактировать профиль</h2>
       <form action="" class="popup__container_form">
-        <input type="text" class="popup__container_name" placeholder="что-то не так">
-        <input type="text" placeholder="что-то не так" class="popup__container_description">
+        <input type="text" class="popup__container_name">
+        <input type="text" class="popup__container_description">
         <button class="popup__container_save">Сохранить</button>
       </form>
       <button type="button" class="popup__container_close"></button>

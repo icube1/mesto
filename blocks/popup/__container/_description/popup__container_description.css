@@ -1,5 +1,6 @@
 .popup__container_description {
   border: none;
+  outline: none;
   border-bottom: 1px solid black;
   margin-bottom: 48px;
   font-family: 'Inter', ‘Arial’, sans-serif;
@@ -8,10 +9,4 @@
   min-height: 27px;
 }
 
-.popup__container_description::placeholder {
-  font-family: 'Inter', ‘Arial’, sans-serif;
-  font-size: 14px;
-  line-height: 17px;
-  color: black;
-}
 

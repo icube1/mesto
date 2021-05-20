@@ -1,6 +1,7 @@
 let openPopup = document.querySelector('.profile__info_edit-button');
 let popup = document.querySelector('.popup');
 let closePopup = document.querySelector('.popup__container_close');
+let profile = document.querySelector('.profile')
 
 function togglePopup() {
   popup.classList.toggle('popup_opened');
@@ -11,25 +12,34 @@ popup.addEventListener('click', function(event) {
     togglePopup();
   }
 })
-//а это код для закрытия поп-апа вне активного окна
+//а это код для закрытия поп-апа профиля вне активного окна
 
 
 openPopup.addEventListener('click', togglePopup);
 
 closePopup.addEventListener('click', togglePopup);
 
-let name = document.querySelector('.profile__info_name').textContent;
-let input = document.querySelector('.popup__container_name');
-input.setAttribute('placeholder', name)
+let profileName = profile.querySelector('.profile__info_name').textContent;
+let nameInput = popup.querySelector('.popup__container_name');
+nameInput.setAttribute('value', profileName)
 
-let about = document.querySelector('.profile__info_description').textContent;
-let input2 = document.querySelector('.popup__container_description');
-input2.setAttribute('placeholder', about);
-//выше два блока кода для авто-вставки текста со страницы в placeholder формы
+let about = profile.querySelector('.profile__info_description').textContent;
+let jobInput = popup.querySelector('.popup__container_description');
+jobInput.setAttribute('value', about);
+//выше два блока кода для авто-вставки текста со страницы в value формы
 
-//ниже код для кнопки like
-let like = document.querySelector('.element__like-button');
-function likeButton() {
-  like.classList.toggle('element__like-button_active');
+let formElement = popup.querySelector('.popup__container_form')
+
+function formSubmitHandler (evt) { //Форма отправки новых имени и описания
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  let nameValue = nameInput.value;
+  let aboutValue = jobInput.value;
+  // Получили значение полей jobInput и nameInput из свойства value
+  profile.querySelector('.profile__info_name').textContent = nameValue;
+  profile.querySelector('.profile__info_description').textContent = aboutValue;
+  // Вставили новые значения
+  togglePopup();
 }
-like.addEventListener('click', likeButton);
+
+// Прикрепляем обработчик к форме
+formElement.addEventListener('submit', formSubmitHandler);

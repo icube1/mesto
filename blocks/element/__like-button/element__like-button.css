@@ -7,6 +7,6 @@
   height: 19px;
 }
 
-.element__like-button_active {
+.element__like-button:active {
   background-image: url(../../../images/like-button_active.png);
 }
