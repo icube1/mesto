@@ -11,7 +11,7 @@
 
 <body class="page">
   <header class="header">
-    <img src="./images/header__logo.svg" alt="" class="header__logo">
+    <img src="./images/header__logo.svg" alt="Логотип Место" class="header__logo">
   </header>
 
   <main class="main">
@@ -20,72 +20,72 @@
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button>
+          <button aria-label="Редактировать профиль" type="button" class="profile__edit-button"></button>
         </div>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <button type="button" class="profile__add-card"></button>
+      <button  aria-label="Добавить место" type="button" class="profile__add-card"></button>
     </section>
     <section class="elements">
-      <div class="element">
+      <article class="element">
         <img src="./images/element__image-1.webp" alt="Карачаевск" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Карачаевск</h2>
-          <button type="button" class="element__like-button"></button>
+          <button aria-label="понравилось" type="button" class="element__like-button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/element__image-2.webp" alt="Гора Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Гора Эльбрус</h2>
-          <button type="button" class="element__like-button"></button>
+          <button aria-label="понравилось" type="button" class="element__like-button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/element__image-3.webp" alt="Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Эльбрус</h2>
-          <button type="button" class="element__like-button"></button>
+          <button aria-label="понравилось" type="button" class="element__like-button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/element__image-1.webp" alt="Карачаевск" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Карачаевск</h2>
-          <button type="button" class="element__like-button"></button>
+          <button aria-label="понравилось" type="button" class="element__like-button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/element__image-2.webp" alt="Гора Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Гора Эльбрус</h2>
-          <button type="button" class="element__like-button"></button>
+          <button aria-label="понравилось" type="button" class="element__like-button"></button>
         </div>
-      </div>
-      <div class="element">
+      </article>
+      <article class="element">
         <img src="./images/element__image-3.webp" alt="Эльбрус" class="element__cover">
         <div class="element__description">
           <h2 class="element__title">Эльбрус</h2>
-          <button type="button" class="element__like-button"></button>
+          <button aria-label="понравилось" type="button" class="element__like-button"></button>
         </div>
-      </div>
+      </article>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
   </footer>
 
-  <section class="popup">
+  <div class="popup">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
-        <input type="text" class="popup__name">
-        <input type="text" class="popup__description">
-        <button class="popup__save">Сохранить</button>
+      <form name="edit-profile" class="popup__form">
+        <input required placeholder="Жак-Ив Кусто" name="name" type="text" class="popup__form_input popup__form_input_name">
+        <input required placeholder="Исследователь океана" name="about" type="text" class="popup__form_input popup__form_input_description">
+        <button type="submit" class="popup__save">Сохранить</button>
       </form>
-      <button type="button" class="popup__close"></button>
+      <button aria-label="закрыть" type="button" class="popup__close"></button>
     </div>
-  </section>
+  </div>
   <script src="./scripts/index.js"></script>
 </body>
 

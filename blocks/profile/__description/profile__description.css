@@ -5,6 +5,10 @@
   line-height: 22px;
   align-self: flex-start;
   justify-self: flex-start;
+  text-overflow: ellipsis;
+  max-width: 336px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 767px) {

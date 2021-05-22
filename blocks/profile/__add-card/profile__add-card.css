@@ -10,6 +10,7 @@
   border: 2px solid #fff;
   cursor: pointer;
   transition: opacity .3s ease;
+  border-radius: 2px;
 }
 
 .profile__add-card:hover {

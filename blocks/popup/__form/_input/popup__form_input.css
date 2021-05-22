@@ -1,8 +1,8 @@
-.popup__name {
+.popup__form_input {
   border: none;
   outline: none;
-  border-bottom: 1px solid black;
-  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  margin-bottom: 48px;
   font-family: 'Inter', ‘Arial’, sans-serif;
   font-size: 14px;
   line-height: 17px;
