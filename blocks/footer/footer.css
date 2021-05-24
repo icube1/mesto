@@ -2,12 +2,10 @@
   font-family: 'Inter', ‘Arial’, sans-serif;
   color: #545454;
   max-width: 880px;
-  min-height: 74px;
-  margin: 45px auto 40px;
-}
+  margin: 0 auto 60px;}
 
 @media screen and (max-width: 767px) {
   .footer {
-    margin: 48px 19px 36px;
+    margin: 0 19px 36px;
   }
 }
