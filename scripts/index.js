@@ -38,9 +38,20 @@ const initialCards = [  //массив с предустановленными �
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const cardTemplate = document.querySelector('.card-template');
-const cardSubmit = cardTemplate.querySelector('.element')
+const cardTemplate = document.querySelector('.card-template').content;
+const cardElements = document.querySelector('.elements');
+const card = cardTemplate.cloneNode(true);
 
+function renderCards() {
+  initialCards.forEach(renderCard);
+}
+
+function renderCard(element) {
+  const card = cardTemplate.cloneNode(true);
+  card.querySelector('.element__title').innerText = element.name;
+  card.querySelector('.element__cover').src = element.link;
+  cardElements.appendChild(card);
+}
 
 function showPopup() {
   popup.classList.toggle('popup_opened');
@@ -70,12 +81,6 @@ function formSubmitHandler(evt) { //Форма отправки новых им�
   hidePopup();
 }
 
-function renderCard(text) {
-  const htmlElement = cardTemplate.cloneNode(true);
-  htmlElement.querySelector('.element__title').innerText = text;
-
-}
-
 // Прикрепляем обработчик к форме
 openPopup.addEventListener('click', showPopup);
 closePopup.addEventListener('click', hidePopup);
@@ -83,3 +88,6 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 addCard.addEventListener('click', toggleCardPopup);
 closeCardPopup.addEventListener('click', toggleCardPopup);
+
+renderCards();
+
