@@ -1,6 +1,6 @@
 const openPopup = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
-const closePopup = document.querySelector('.popup__close');
+const closePopup = popup.querySelector('.popup__close');
 const profile = document.querySelector('.profile')
 const formElement = popup.querySelector('.popup__form')
 const profileName = profile.querySelector('.profile__name');
@@ -68,8 +68,6 @@ function toggleCardPopup() {
 
 //выше функции для вкл/выкл поп-апа
 
-
-
 function formSubmitHandler(evt) { //Форма отправки новых имени и описания
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   const nameValue = nameInput.value;
@@ -81,10 +79,25 @@ function formSubmitHandler(evt) { //Форма отправки новых им�
   hidePopup();
 }
 
+const cardTitle = cardPopup.querySelector('.popup__input_field_name');
+const cardImage = cardPopup.querySelector('.popup__input_field_description');
+const cardElement = cardPopup.querySelector('.popup__form');
+
+function handleAddCard(event) {
+  event.preventDefault();
+  const card = cardTemplate.cloneNode(true);
+  card.querySelector('.element__title').innerText = cardTitle.value;
+  card.querySelector('.element__cover').src = cardImage.value;
+  cardElements.appendChild(card);
+  toggleCardPopup();
+}
+
+
 // Прикрепляем обработчик к форме
 openPopup.addEventListener('click', showPopup);
 closePopup.addEventListener('click', hidePopup);
 formElement.addEventListener('submit', formSubmitHandler);
+cardElement.addEventListener('submit', handleAddCard);
 
 addCard.addEventListener('click', toggleCardPopup);
 closeCardPopup.addEventListener('click', toggleCardPopup);
