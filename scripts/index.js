@@ -52,6 +52,7 @@ function renderCard(element) {
   card.querySelector('.element__cover').src = element.link;
   cardElements.appendChild(card);
 }
+renderCards();
 
 function showPopup() {
   popup.classList.toggle('popup_opened');
@@ -69,13 +70,11 @@ function toggleCardPopup() {
 //выше функции для вкл/выкл поп-апа
 
 function formSubmitHandler(evt) { //Форма отправки новых имени и описания
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault();
   const nameValue = nameInput.value;
   const aboutValue = jobInput.value;
-  // Получили значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameValue;
   about.textContent = aboutValue;
-  // Вставили новые значения
   hidePopup();
 }
 
@@ -92,6 +91,13 @@ function handleAddCard(event) {
   toggleCardPopup();
 }
 
+const likeButton = document.querySelectorAll('.element__like-button');  //Если поставить этот массив после вызова карточек, он не сможет ничего найти
+  likeButton.forEach((icon) => {
+    icon.addEventListener('click', ({target}) => {
+      target.classList.toggle('element__like-button_active');
+  });
+});
+
 
 // Прикрепляем обработчик к форме
 openPopup.addEventListener('click', showPopup);
@@ -102,5 +108,4 @@ cardElement.addEventListener('submit', handleAddCard);
 addCard.addEventListener('click', toggleCardPopup);
 closeCardPopup.addEventListener('click', toggleCardPopup);
 
-renderCards();
 
