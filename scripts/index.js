@@ -1,17 +1,3 @@
-const openPopup = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
-const closePopup = popup.querySelector('.popup__close');
-const profile = document.querySelector('.profile')
-const formElement = popup.querySelector('.popup__form')
-const profileName = profile.querySelector('.profile__name');
-const nameInput = popup.querySelector('.popup__input_field_name');
-const about = profile.querySelector('.profile__description');
-const jobInput = popup.querySelector('.popup__input_field_description');
-
-const addCard = profile.querySelector('.profile__add-card');
-const cardPopup = document.querySelector('.card-popup');
-const closeCardPopup = cardPopup.querySelector('.popup__close');
-
 const initialCards = [  //массив с предустановленными карточками
   {
     name: 'Архыз',
@@ -38,18 +24,40 @@ const initialCards = [  //массив с предустановленными �
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+const openPopup = document.querySelector('.profile__edit-button');
+const popup = document.querySelector('.popup');
+const closePopup = popup.querySelector('.popup__close');
+const profile = document.querySelector('.profile')
+const formElement = popup.querySelector('.popup__form')
+const profileName = profile.querySelector('.profile__name');
+const nameInput = popup.querySelector('.popup__input_field_name');
+const about = profile.querySelector('.profile__description');
+const jobInput = popup.querySelector('.popup__input_field_description');
+const addCard = profile.querySelector('.profile__add-card');
+const cardPopup = document.querySelector('.card-popup');
+const closeCardPopup = cardPopup.querySelector('.popup__close');
 const cardTemplate = document.querySelector('.card-template').content;
 const cardElements = document.querySelector('.elements');
 const card = cardTemplate.cloneNode(true);
+const cardTitle = cardPopup.querySelector('.popup__input_field_name');
+const cardImage = cardPopup.querySelector('.popup__input_field_description');
+const cardElement = cardPopup.querySelector('.popup__form');
+
 
 function renderCards() {
   initialCards.forEach(renderCard);
 }
 
-function renderCard(element) {
+function renderCard(element) { //Вызов предустановленныой карточки
   const card = cardTemplate.cloneNode(true);
+  const deleteButton = card.querySelector('.element__delete-button');
+  const likeButton = card.querySelector('.element__like-button');
   card.querySelector('.element__title').innerText = element.name;
   card.querySelector('.element__cover').src = element.link;
+
+  likeButton.addEventListener('click', likeCard);
+  deleteButton.addEventListener('click', handleDeleteCard);
+
   cardElements.appendChild(card);
 }
 renderCards();
@@ -78,28 +86,41 @@ function formSubmitHandler(evt) { //Форма отправки новых им�
   hidePopup();
 }
 
-const cardTitle = cardPopup.querySelector('.popup__input_field_name');
-const cardImage = cardPopup.querySelector('.popup__input_field_description');
-const cardElement = cardPopup.querySelector('.popup__form');
 
-function handleAddCard(event) {
+function handleAddCard(event) { // Создание карточки вручную
   event.preventDefault();
   const card = cardTemplate.cloneNode(true);
+  const deleteButton = card.querySelector('.element__delete-button');
+  const likeButton = card.querySelector('.element__like-button');
   card.querySelector('.element__title').innerText = cardTitle.value;
   card.querySelector('.element__cover').src = cardImage.value;
+  likeButton.addEventListener('click', likeCard);
+  deleteButton.addEventListener('click', handleDeleteCard);
   cardElements.appendChild(card);
   toggleCardPopup();
+
 }
 
-const likeButton = document.querySelectorAll('.element__like-button');  //Если поставить этот массив после вызова карточек, он не сможет ничего найти
-  likeButton.forEach((icon) => {
-    icon.addEventListener('click', ({target}) => {
-      target.classList.toggle('element__like-button_active');
-  });
-});
+function handleDeleteCard(event) {
+  event.target.closest('.element').remove();
+}
 
+function likeCard(event) {
+  event.target.classList.toggle('element__like-button_active');
+}
 
-// Прикрепляем обработчик к форме
+//   likeButton.forEach((icon) => {
+//     icon.addEventListener('click', ({target}) => {
+//       target.classList.toggle('element__like-button_active');
+//   });
+// });
+// deleteButton.forEach((icon) => {
+//   icon.addEventListener('click', ({target}) => {
+//     target.closest('.element').remove();
+//   })
+// })
+
+// Прикрепляем обработчикu
 openPopup.addEventListener('click', showPopup);
 closePopup.addEventListener('click', hidePopup);
 formElement.addEventListener('submit', formSubmitHandler);
