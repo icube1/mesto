@@ -24,7 +24,7 @@
         </div>
         <p class="profile__description">Исследователь океана</p>
       </div>
-      <button  aria-label="Добавить место" type="button" class="profile__add-card"></button>
+      <button aria-label="Добавить место" type="button" class="profile__add-card"></button>
     </section>
     <section class="elements">
 
@@ -39,7 +39,8 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="edit-profile" class="popup__form">
         <input required placeholder="Жак-Ив Кусто" name="name" type="text" class="popup__input popup__input_field_name">
-        <input required placeholder="Исследователь океана" name="about" type="text" class="popup__input popup__input_field_description">
+        <input required placeholder="Исследователь океана" name="about" type="text"
+          class="popup__input popup__input_field_description">
         <button type="submit" class="popup__save">Сохранить</button>
       </form>
       <button aria-label="закрыть" type="button" class="popup__close"></button>
@@ -51,10 +52,19 @@
       <h2 class="popup__title">Новое место</h2>
       <form name="edit-profile" class="popup__form">
         <input required placeholder="Название" name="name" type="text" class="popup__input popup__input_field_name">
-        <input required placeholder="Ссылка на картинку" name="about" type="text" class="popup__input popup__input_field_description">
+        <input required placeholder="Ссылка на картинку" name="about" type="text"
+          class="popup__input popup__input_field_description">
         <button type="submit" class="popup__save">Создать</button>
       </form>
       <button aria-label="закрыть" type="button" class="popup__close"></button>
+    </div>
+  </div>
+
+  <div class="image-popup popup">
+    <div class="image-popup__container">
+      <button aria-label="закрыть" type="button" class="popup__close"></button>
+      <img class="popup__image" alt="Место">
+      <figure class="popup__subtitle">Место</figure>
     </div>
   </div>
 
