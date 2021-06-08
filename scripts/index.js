@@ -43,10 +43,12 @@ const cardTitle = cardPopup.querySelector('.popup__input_field_name');
 const cardImage = cardPopup.querySelector('.popup__input_field_description');
 const cardElement = cardPopup.querySelector('.popup__form');
 const imagePopup = document.querySelector('.image-popup');
+const imageSubtitle = document.querySelector('.popup__subtitle');
+const imagePopupPicture = imagePopup.querySelector('.popup__image');
 const closeImagePopup = imagePopup.querySelector('.popup__close');
 
 function showProfilePopup() {
-  profilePopup.classList.add('popup_opened');
+  showPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = about.textContent;
 }
@@ -78,10 +80,8 @@ function renderCard(link, name) { //отрисовка карточек
   const cardSubtitle = card.querySelector('.element__title');
 
   function openImage() {
-    const imageSubtitle = document.querySelector('.popup__subtitle');
-    const imagePopup = document.querySelector('.image-popup');
-    imagePopup.classList.toggle('popup_opened');
-    imagePopup.querySelector('.popup__image').src = coverPopup.src;
+    showPopup(imagePopup);
+    imagePopupPicture.src = coverPopup.src;
     imageSubtitle.innerText = cardSubtitle.innerText;
   }
 
