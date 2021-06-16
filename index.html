@@ -40,12 +40,12 @@
       <form name="edit-profile" class="popup__form">
         <label class="popup__label">
           <input required placeholder="Жак-Ив Кусто" name="name" type="text"
-            class="popup__input popup__input_field_name" minlength="2" maxlength="40">
+            class="popup__input popup__input_field_name" minlength="2" maxlength="40" autocomplete="off">
           <span id="name-error" class="error"></span>
         </label>
         <label class="popup__label">
           <input required placeholder="Исследователь океана" name="about" type="text"
-            class="popup__input popup__input_field_description" minlength="2" maxlength="200">
+            class="popup__input popup__input_field_description" minlength="2" maxlength="200" autocomplete="off">
           <span id="about-error" class="error"></span>
         </label>
         <button type="submit" class="popup__save">Сохранить</button>
@@ -60,12 +60,12 @@
       <form name="edit-card" class="popup__form">
         <label class="popup__label">
           <input required placeholder="Название" name="title" type="text" class="popup__input popup__input_field_name"
-            minlength="2" maxlength="40">
+            minlength="2" maxlength="40" autocomplete="off">
           <span id="title-error" class="error"></span>
         </label>
         <label class="popup__label">
-          <input type="url" required placeholder="Ссылка на картинку" name="link" type="text"
-            class="popup__input popup__input_field_description">
+          <input type="url" required placeholder="Ссылка на картинку" name="link"
+            class="popup__input popup__input_field_description" autocomplete="off">
           <span id="link-error" class="error"></span>
         </label>
         <button disabled type="submit" class="popup__save popup__save_invalid">Создать</button>

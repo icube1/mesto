@@ -55,10 +55,35 @@ function showProfilePopup() {
 
 function hidePopup(popup) {
   popup.classList.remove('popup_opened');
+
+  document.removeEventListener('keydown', (evt) => { //Удаление обработчика закрытия поп-апа кнопкой esc
+    if (evt.keyCode === 27) {
+      hidePopup(popup);
+    }
+  })
+
+  popup.removeEventListener('mousedown', (event) => { //Удаление обработчика закрытия поп-апа кликом на оверлей
+    if(event.target === event.currentTarget) {
+      hidePopup(popup);
+    }
+  })
+
 }
 
 function showPopup(popup) {
   popup.classList.add('popup_opened');
+
+  document.addEventListener('keydown', (evt) => {//Открытие поп-апа кнопкой esc
+    if (evt.keyCode === 27) {
+      hidePopup(popup);
+    }
+  })
+
+  popup.addEventListener('mousedown', function(event) {//закрытие поп-апа кликом на оверлей
+    if(event.target === event.currentTarget) {
+      hidePopup(popup);
+    }
+  })
 }
 
 //выше функции для вкл/выкл поп-апа

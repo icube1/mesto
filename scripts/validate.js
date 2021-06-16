@@ -1,8 +1,8 @@
-function enableValidation() {
-  const form = Array.from(document.querySelectorAll('.popup__form'));
+function enableValidation(config) {
+  const form = Array.from(document.querySelectorAll(config.form));
   form.forEach(function (item) {
   item.addEventListener('submit', handleFormSubmit);
-  item.addEventListener('input', handleFormInput);
+  item.addEventListener('input', (event) => handleFormInput(event, config));
   })
 }
 
@@ -17,31 +17,14 @@ function handleFormSubmit(event) {
   }
 }
 
-function handleFormInput(event) {
+function handleFormInput(event, config) {
   const input = event.target;
   const form = event.currentTarget;
 
-  // 1. определить невалидные поля и установить тексты ошибок
-  setCustomError(input);
-  // 2. Отобразить ошибки на форме
+  //  Отображение ошибки на форме
   setFieldError(input);
-  //3. Меняем состояние кнопки отправки в зависимости от валидности формы
-  setSubmitButtonState(form);
-}
-
-function setCustomError(input) {
-  const validity = input.validity;
-  input.setCustomValidity('')
-
-  if (validity.tooShort || validity.tooLong) {
-    const min = input.getAttribute('minlength');
-    const max = input.getAttribute('maxlength')
-
-    input.setCustomValidity(`Длина должна быть от ${min} до ${max} символов`)
-  }
-  if(validity.typeMismatch) {
-    input.setCustomValidity('Введите адрес сайта.');
-  }
+  // Меняем состояние кнопки отправки в зависимости от валидности формы
+  setSubmitButtonState(form, config);
 }
 
 function setFieldError(input) {
@@ -49,17 +32,27 @@ function setFieldError(input) {
   span.textContent = input.validationMessage;
 }
 
-function setSubmitButtonState(form) {
-  const button = form.querySelector('.popup__save');
+function setSubmitButtonState(form, config) {
+  const button = form.querySelector(config.submitButton);
   const isValid = form.checkValidity();
+  const inputField = form.querySelectorAll(config.input);
 
   if(isValid) {
-    button.classList.remove('popup__save_invalid');
+    button.classList.remove(config.inactiveButtonClass);
     button.removeAttribute('disabled');
+    inputField.forEach((item) => item.classList.remove(config.inputInvalidClass));
   } else {
-    button.classList.add('popup__save_invalid');
+    button.classList.add(config.inactiveButtonClass);
     button.setAttribute('disabled', 'disabled');
+    inputField.forEach((item) => item.classList.add(config.inputInvalidClass));
   }
 }
 
-enableValidation();
+
+enableValidation({
+  form: '.popup__form',
+  input: '.popup__input',
+  inputInvalidClass: 'popup__input_invalid',
+  submitButton: '.popup__save',
+  inactiveButtonClass: 'popup__save_invalid',
+});
