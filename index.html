@@ -38,9 +38,16 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="edit-profile" class="popup__form">
-        <input required placeholder="Жак-Ив Кусто" name="name" type="text" class="popup__input popup__input_field_name">
-        <input required placeholder="Исследователь океана" name="about" type="text"
-          class="popup__input popup__input_field_description">
+        <label class="popup__label">
+          <input required placeholder="Жак-Ив Кусто" name="name" type="text"
+            class="popup__input popup__input_field_name" minlength="2" maxlength="40">
+          <span id="name-error" class="error"></span>
+        </label>
+        <label class="popup__label">
+          <input required placeholder="Исследователь океана" name="about" type="text"
+            class="popup__input popup__input_field_description" minlength="2" maxlength="200">
+          <span id="about-error" class="error"></span>
+        </label>
         <button type="submit" class="popup__save">Сохранить</button>
       </form>
       <button aria-label="закрыть" type="button" class="popup__close"></button>
@@ -50,11 +57,18 @@
   <div class="card-popup popup">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
-      <form name="edit-profile" class="popup__form">
-        <input required placeholder="Название" name="name" type="text" class="popup__input popup__input_field_name">
-        <input required placeholder="Ссылка на картинку" name="about" type="text"
-          class="popup__input popup__input_field_description">
-        <button type="submit" class="popup__save">Создать</button>
+      <form name="edit-card" class="popup__form">
+        <label class="popup__label">
+          <input required placeholder="Название" name="title" type="text" class="popup__input popup__input_field_name"
+            minlength="2" maxlength="40">
+          <span id="title-error" class="error"></span>
+        </label>
+        <label class="popup__label">
+          <input type="url" required placeholder="Ссылка на картинку" name="link" type="text"
+            class="popup__input popup__input_field_description">
+          <span id="link-error" class="error"></span>
+        </label>
+        <button disabled type="submit" class="popup__save popup__save_invalid">Создать</button>
       </form>
       <button aria-label="закрыть" type="button" class="popup__close"></button>
     </div>
@@ -80,6 +94,7 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

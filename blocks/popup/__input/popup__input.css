@@ -8,6 +8,7 @@
   font-size: 14px;
   line-height: 17px;
   min-height: 27px;
+  width: 100%;
 }
 
 .popup__input:last-child {
