@@ -21,14 +21,14 @@ const imageSubtitle = document.querySelector('.popup__subtitle');
 const imagePopupPicture = imagePopup.querySelector('.popup__image');
 const buttonCloseImagePopup = imagePopup.querySelector('.popup__close');
 
-function closeEscPopup(evt) {
+function closeEscPopup(evt) { //Закрытие popup при нажатии Esc
   if (evt.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');
     hidePopup(popup);
   }
 }
 
-function closeOverlayClick(evt) {
+function closeOverlayClick(evt) {//Закрытие popup при клике на оверлей
   if(evt.target === evt.currentTarget) {
     const popup = document.querySelector('.popup_opened');
     hidePopup(popup);
@@ -57,8 +57,7 @@ function showPopup(popup) {
 
   popup.addEventListener('mousedown', closeOverlayClick);
 }
-
-//выше функции для вкл/выкл поп-апа
+//выше 3 функции для вкл/выкл поп-апов
 
 function handleFormSubmit(evt) { //Форма отправки новых имени и описания
   evt.preventDefault();
@@ -76,13 +75,12 @@ function renderCard(link, name) { //отрисовка карточек
   const coverPopup = card.querySelector('.element__cover');
   const cardSubtitle = card.querySelector('.element__title');
 
-  function openImage() {
-    showPopup(imagePopup);
+  function openImage() {//Открытие поп-апа с увеличенной картинкой
     imagePopupPicture.src = coverPopup.src;
     imageSubtitle.innerText = cardSubtitle.innerText;
     imagePopupPicture.alt = coverPopup.alt;
+    showPopup(imagePopup);
   }
-
 
   cardSubtitle.innerText = cardTitle.value;
   coverPopup.src = cardImage.value;
@@ -98,26 +96,27 @@ function renderCard(link, name) { //отрисовка карточек
   return card;
 }
 
-function renderCards() {
+function renderCards() {//Функция отрисовки заготовленных карточек
   initialCards.forEach((item) => cardElements.append(renderCard(item.link, item.name)));
 }
 
 renderCards();
 
-function handleAddCard(event) {
+function handleAddCard(event) {//Добавление карточек пользователем
   event.preventDefault();
   cardElements.prepend(renderCard(cardImage.value, cardTitle.value));
   hidePopup(popupCard);
 }
 
-function handleDeleteCard(event) {
+function handleDeleteCard(event) {//удаление карточек
   event.target.closest('.element').remove();
 }
 
-function likeCard(event) {
+function likeCard(event) {//Лайк карточки
   event.target.classList.toggle('element__like-button_active');
 }
 
+//Обработчики
 buttonEditProfile.addEventListener('click', showProfilePopup);
 buttonCloseProfilePopup.addEventListener('click', () => hidePopup(popupProfile));
 formElement.addEventListener('submit', handleFormSubmit);
