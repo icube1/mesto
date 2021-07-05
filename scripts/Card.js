@@ -11,23 +11,26 @@ class Card {
 
   _getTemplate() {
     const card = document
-      .querySelector('.card-template')
+      .querySelector(this._cardSelector)
       .content
       .querySelector('.element')
       .cloneNode(true);
 
     return card;
   }
-  _renderCard() {
+  renderCard() {
     this._element = this._getTemplate();
 
-    this._element.querySelector('.element__cover').src = this._link;
-    this._element.querySelector('.element__title').innerText = this._name;
-    this._element.querySelector('.element__cover').alt = this._name;
+    const cardCover = this._element.querySelector('.element__cover');
+    const cardTitle = this._element.querySelector('.element__title')
 
-    this._element.querySelector('.element__delete-button').addEventListener('click', () => {this._handleDeleteCard()});
-    this._element.querySelector('.element__like-button').addEventListener('click', () => {this._handleLikeCard()});
-    this._element.querySelector('.element__cover').addEventListener('click', () => {this._handleOpenImage()});
+    cardCover.src = this._link;
+    cardTitle.innerText = this._name;
+    cardCover.alt = this._name;
+
+    this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteCard());
+    this._element.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeCard());
+    cardCover.addEventListener('click', () => this._handleOpenImage());
 
     return this._element;
   }
@@ -41,9 +44,13 @@ class Card {
   }
 
   _handleOpenImage() {//Открытие увеличенного изображения
-    this._popupImagePicture.src = this._element.querySelector('.element__cover').src;
-    this._popupImagePicture.alt = this._element.querySelector('.element__cover').alt;
-    this._imageSubtitle.innerText = this._element.querySelector('.element__title').innerText;
+    const cardCover = this._element.querySelector('.element__cover')
+    const cardTitle = this._element.querySelector('.element__title')
+
+
+    this._popupImagePicture.src = cardCover.src;
+    this._popupImagePicture.alt = cardCover.alt;
+    this._imageSubtitle.innerText = cardTitle.innerText;
     this._showPopup(this._popupImage);
   }
 

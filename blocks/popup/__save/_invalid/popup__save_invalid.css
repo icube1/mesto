@@ -1,4 +1,5 @@
 .popup__save_invalid {
+  cursor: default;
   color: black;
   background-color: white;
   opacity: .2;

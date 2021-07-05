@@ -57,7 +57,6 @@ class FormValidator {  //Класс для форм валидации
     this._setEventListeners(this.form);
     this._form.addEventListener('submit', (event) => {
       event.preventDefault();
-      // this.form.reset(); // почему-то сбрасывает форму до отправления. Разобраться!
 
     })
   }
