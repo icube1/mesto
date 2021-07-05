@@ -51,8 +51,10 @@ function hidePopup(popup) {
   const form = popup.querySelector('.popup__form')
 
   popup.classList.remove('popup_opened');
-  span.forEach((item) => item.textContent = '');
-  form.reset();
+  if (form) {
+    span.forEach((item) => item.textContent = '');
+    form.reset();
+  }
 
   document.removeEventListener('keydown', closeEscPopup);
   popup.removeEventListener('mousedown', closeOverlayClick);
