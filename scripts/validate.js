@@ -1,58 +1,74 @@
-function enableValidation(config) {
-  const form = Array.from(document.querySelectorAll(config.form));
-  form.forEach(function (item) {
-  item.addEventListener('submit', handleFormSubmit);
-  item.addEventListener('input', (event) => handleFormInput(event, config));
-  })
-}
+class FormValidator {  //Класс для форм валидации
+  constructor(data, form) {
+    this._form = form;
+    this._formInputs = Array.from(this._form.querySelectorAll(data.input));
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  const form = event.currentTarget;
-  const isValid = form.checkValidity();
-
-  if(isValid) {
-    form.reset();
+    this._input = data.input;
+    this._inputInvalidClass = data.inputInvalidClass;
+    this._submitButton = this._form.querySelector(data.submitButton);
+    this._inactiveButtonClass = data.inactiveButtonClass;
   }
-}
 
-function handleFormInput(event, config) {
-  const input = event.target;
-  const form = event.currentTarget;
+  //Установка состояния кнопки
+  setSubmitButtonState(_form, config) {
+    const isValid = this._form.checkValidity();
 
-  //  Отображение ошибки на форме
-  setFieldError(input);
-  // Меняем состояние кнопки отправки в зависимости от валидности формы
-  setSubmitButtonState(form, config);
-}
-
-function setFieldError(input) {
-  const span = document.querySelector(`#${input.name}-error`);
-  span.textContent = input.validationMessage;
-}
-
-function setSubmitButtonState(form, config) {
-  const button = form.querySelector(config.submitButton);
-  const isValid = form.checkValidity();
-  const inputField = form.querySelectorAll(config.input);
-
-  if(isValid) {
-    button.classList.remove(config.inactiveButtonClass);
-    button.removeAttribute('disabled');
-    inputField.forEach((item) => item.classList.remove(config.inputInvalidClass));
-  } else {
-    button.classList.add(config.inactiveButtonClass);
-    button.setAttribute('disabled', 'disabled');
-    inputField.forEach((item) => item.classList.add(config.inputInvalidClass));
+    if(isValid) {
+      this._submitButton.classList.remove(config.inactiveButtonClass);
+      this._submitButton.removeAttribute('disabled');
+    } else {
+      this._submitButton.classList.add(config.inactiveButtonClass);
+      this._submitButton.setAttribute('disabled', 'disabled');
+    }
   }
-}
 
+//Обработчик полей ввода
+  _handleFormInput(event, config) {
+    const formInput = event.target;
+    const form = event.currentTarget;
 
-enableValidation({
+    // Меняем состояние кнопки отправки в зависимости от валидности формы
+    this.setSubmitButtonState(form, config);
+  }
+
+  _isValid = (formInput) => {  //проверка валидности формы и установка сообщения об ошибке
+    const span = this._form.querySelector(`#${formInput.name}-error`);
+
+    if (!formInput.validity.valid || formInput.validity.typeMismatch) {
+      span.textContent = formInput.validationMessage;
+      span.classList.add('popup__input_invalid');
+    } else {
+      span.textContent = formInput.validationMessage;
+      span.classList.remove('popup__input_invalid');
+    }
+  }
+
+  _setEventListeners = () => {  //слушатели для полей ввода
+    this._formInputs.forEach((formInput) => {
+      formInput.addEventListener('input', () => {
+        this._isValid(formInput);
+        this.setSubmitButtonState(formInput, enableValidationConfig);
+        this._handleFormInput(formInput, enableValidationConfig)
+      });
+    })
+  }
+
+  enableValidation() {
+    this._setEventListeners(this.form);
+    this._form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      // this.form.reset(); // почему-то сбрасывает форму до отправления. Разобраться!
+
+    })
+  }
+};
+
+const enableValidationConfig = {
   form: '.popup__form',
   input: '.popup__input',
   inputInvalidClass: 'popup__input_invalid',
   submitButton: '.popup__save',
   inactiveButtonClass: 'popup__save_invalid',
-});
+};
+
+export {FormValidator, enableValidationConfig}
