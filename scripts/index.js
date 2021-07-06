@@ -24,6 +24,16 @@ const imageSubtitle = document.querySelector('.popup__subtitle');
 const popupImagePicture = popupImage.querySelector('.popup__image');
 const buttonClosepopupImage = popupImage.querySelector('.popup__close');
 
+function clearForm(popup) { // функция для очистки формы
+  const span = popup.querySelectorAll('.error');
+  const form = popup.querySelector('.popup__form')
+
+  if (form) {
+    span.forEach((item) => item.textContent = '');
+    form.reset();
+  }
+}
+
 function closeEscPopup(evt) { //Закрытие popup при нажатии Esc
   const popup = document.querySelector('.popup_opened');
 
@@ -47,15 +57,8 @@ function showProfilePopup() {
 }
 
 function hidePopup(popup) {
-  const span = popup.querySelectorAll('.error');
-  const form = popup.querySelector('.popup__form')
-
   popup.classList.remove('popup_opened');
-  if (form) {
-    span.forEach((item) => item.textContent = '');
-    form.reset();
-  }
-
+  clearForm(popup);
   document.removeEventListener('keydown', closeEscPopup);
   popup.removeEventListener('mousedown', closeOverlayClick);
 

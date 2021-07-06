@@ -18,20 +18,24 @@ class Card {
 
     return card;
   }
-  renderCard() {
+  _setEventListeners() {  //слушатели для карточек
+    this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteCard());
+    this._element.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeCard());
+    this._element.querySelector('.element__cover').addEventListener('click', () => this._handleOpenImage());
+  }
+
+  renderCard() {  //отрисовка карточек
     this._element = this._getTemplate();
 
     const cardCover = this._element.querySelector('.element__cover');
     const cardTitle = this._element.querySelector('.element__title')
 
     cardCover.src = this._link;
-    cardTitle.innerText = this._name;
+    cardTitle.textContent = this._name;
     cardCover.alt = this._name;
 
-    this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteCard());
-    this._element.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeCard());
-    cardCover.addEventListener('click', () => this._handleOpenImage());
-
+    this._setEventListeners();
+    
     return this._element;
   }
 
@@ -50,7 +54,7 @@ class Card {
 
     this._popupImagePicture.src = cardCover.src;
     this._popupImagePicture.alt = cardCover.alt;
-    this._imageSubtitle.innerText = cardTitle.innerText;
+    this._imageSubtitle.textContent = cardTitle.textContent;
     this._showPopup(this._popupImage);
   }
 
