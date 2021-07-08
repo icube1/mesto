@@ -34,6 +34,7 @@ function clearForm(popup) { // функция для очистки формы
   }
 }
 
+//ниже функции для вкл/выкл поп-апов
 function closeEscPopup(evt) { //Закрытие popup при нажатии Esc
   const popup = document.querySelector('.popup_opened');
 
@@ -71,7 +72,6 @@ function showPopup(popup) {
 
   popup.addEventListener('mousedown', closeOverlayClick);
 }
-//выше 3 функции для вкл/выкл поп-апов
 
 function handleFormSubmit(evt) { //Форма отправки новых имени и описания
   evt.preventDefault();
