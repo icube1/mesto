@@ -6,18 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="shortcut icon" href="./favicon.ico.png">
-  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="shortcut icon" href=<%=require("./favicon.ico")%> />
 </head>
 
 <body class="page">
   <header class="header">
-    <img src="./images/header__logo.svg" alt="Логотип Место" class="header__logo">
+    <img src=<%=require("./images/header__logo.svg")%>
+    alt="Логотип Место"
+    class="header__logo"
+    />
   </header>
 
   <main class="main">
     <section class="profile">
-      <img src="./images/profile__avatar.webp" alt="Аватар пользователя" class="profile__avatar">
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+        <img src=<%=require("./images/profile__avatar.webp")%>
+        alt="Аватар пользователя"
+        class="profile__avatar"
+      /></a>
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Рик Эстли</h1>
@@ -78,22 +84,28 @@
   <div class="image-popup popup">
     <div class="image-popup__container">
       <button aria-label="закрыть" type="button" class="popup__close"></button>
-      <img src="./images/profile__avatar.webp" class="popup__image" alt="Место">
+      <img
+      src=<%=require("/images/profile__avatar.webp")%>
+      class="popup__image"
+      alt="Место"
+      />
       <figure class="popup__subtitle">Место</figure>
     </div>
   </div>
 
   <template class="card-template">
     <article class="element">
-      <img src="./images/profile__avatar.webp" alt="" class="element__cover">
-      <img src="./images/delete-card-button.svg" alt="Удалить карточку" class="element__delete-button">
+      <img src=<%=require("./images/profile__avatar.webp")%>
+      alt=""
+      class="element__cover"
+      />
+      <img src=<%=require("./images/delete-card-button.svg")%> alt="Удалить карточку" class="element__delete-button" />
       <div class="element__description">
         <h2 class="element__title"></h2>
         <button aria-label="понравилось" type="button" class="element__like-button"></button>
       </div>
     </article>
   </template>
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>

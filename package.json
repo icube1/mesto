@@ -1,0 +1,47 @@
+{
+  "name": "mesto",
+  "version": "7.0.0",
+  "description": "### Адаптивная страница \"Место\" ### [проект на github pages](https://icube1.github.io/mesto/)",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icube1/mesto.git"
+  },
+  "author": "Galimzyanov Ruslan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icube1/mesto/issues"
+  },
+  "homepage": "https://github.com/icube1/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "autoprefixer": "^10.3.1",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^5.2.6",
+    "cssnano": "^5.0.6",
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "html-webpack-plugin": "^5.3.2",
+    "loader": "^2.1.1",
+    "mini-css-extract-plugin": "^2.1.0",
+    "postcss-loader": "^6.1.1",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "corejs": "^1.0.0"
+  }
+}

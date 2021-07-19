@@ -1,12 +1,9 @@
 class Card {
-	constructor(data, cardSelector, popupImagePicture, imageSubtitle, showPopup, popupImage) {
+	constructor(data, cardSelector, handleCardClick) {
 		this._name = data.name;
 		this._link = data.link;
     this._cardSelector = cardSelector;
-    this._popupImagePicture = popupImagePicture;
-    this._imageSubtitle = imageSubtitle;
-    this._showPopup = showPopup;
-    this._popupImage = popupImage;
+    this._handleCardClick = handleCardClick;
 	}
 
   _getTemplate() {
@@ -35,7 +32,7 @@ class Card {
     cardCover.alt = this._name;
 
     this._setEventListeners();
-    
+
     return this._element;
   }
 
@@ -60,3 +57,5 @@ class Card {
 
 }
 export {Card}
+
+
