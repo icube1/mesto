@@ -1,6 +1,5 @@
 //TODO:
 //валидация форм
-//добавление карточки
 
 import '../pages/index.css';
 
@@ -58,14 +57,33 @@ renderCards.renderInitialCards();
 
 
 //ПОП-АПЫ:
+// Новая карточка
+const formValidatorCard = new FormValidator(enableValidationConfig, cardElement);
+formValidatorCard.enableValidation();// валидация поп-апа карточки
+
+const popupAddCard = new PopupWithForm(popupCard, handleSubmitCard);
+popupAddCard.setEventListeners();
+
+function openAddCardPopup() {
+  popupAddCard.open()
+  formValidatorCard.setEventListeners();
+}
+
+function handleSubmitCard(form) {
+  const inputElement = {
+    name: form['title'],
+    link: form['link']
+  };
+  console.log(inputElement)
+  renderCards.addCard(cardRenderer(inputElement));
+}
 
 //Профиль
 const formValidatorProfile = new FormValidator(enableValidationConfig, formElement);
-formValidatorProfile.enableValidation;//валидация профиля(не работает)
+formValidatorProfile.enableValidation();//валидация профиля(не работает)
 
 const popupEditProfile = new PopupWithForm(popupProfile, handleSubmitProfile);
 popupEditProfile.setEventListeners();
-console.log(popupEditProfile)
 
 const openProfilePopup = new UserInfo(profileName, profileAbout);
 
@@ -82,21 +100,9 @@ function handleSubmitProfile(form) { // сабмит поп-апа профил�
 }
 
 
-//Новая карточка
-// const formValidatorCard = new FormValidator(enableValidationConfig, cardElement);
-// formValidatorCard.enableValidation();// валидация поп-апа карточки
-
-// const popupAddCard = new PopupWithForm(popupCard, handleSubmitProfile);
-// popupAddCard.setEventListeners();
-
-
-// function openAddCardPopup() {
-//   formValidatorCard.setEventListeners();
-//   popupCard.open()
-// }
 
 buttonEditProfile.addEventListener('click', handleUserProfile);
-// buttonAddCardPopup.addEventListener('click', openAddCardPopup);
+buttonAddCardPopup.addEventListener('click', openAddCardPopup);
 
 
 export {popupImagePicture, imageSubtitle, buttonCloseProfilePopup, profileName, profileAbout}

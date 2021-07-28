@@ -16,7 +16,6 @@ export default class UserInfo {
   setUserInfo(profile) {
     this._name = profile.name;
     this._about = profile.about;
-    console.log(profile.about)
 
     profileName.textContent = profile.name;
     profileAbout.textContent = profile.about;
