@@ -18,7 +18,7 @@ class Card {
   _setEventListeners() {  //слушатели для карточек
     this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteCard());
     this._element.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeCard());
-    this._element.querySelector('.element__cover').addEventListener('click', () => this._handleOpenImage());
+    this._element.querySelector('.element__cover').addEventListener('click', (evt) => this._handleCardClick(evt));
   }
 
   renderCard() {  //отрисовка карточек
@@ -43,18 +43,6 @@ class Card {
   _handleLikeCard() {//Лайк карточек
     this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
   }
-
-  _handleOpenImage() {//Открытие увеличенного изображения
-    const cardCover = this._element.querySelector('.element__cover')
-    const cardTitle = this._element.querySelector('.element__title')
-
-
-    this._popupImagePicture.src = cardCover.src;
-    this._popupImagePicture.alt = cardCover.alt;
-    this._imageSubtitle.textContent = cardTitle.textContent;
-    this._showPopup(this._popupImage);
-  }
-
 }
 export {Card}
 

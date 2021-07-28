@@ -43,7 +43,7 @@ class FormValidator {  //Класс для форм валидации
     }
   }
 
-  _setEventListeners = () => {  //слушатели для полей ввода
+  setEventListeners = () => {  //слушатели для полей ввода
     this._formInputs.forEach((formInput) => {
       formInput.addEventListener('input', () => {
         this._isValid(formInput);
@@ -53,8 +53,8 @@ class FormValidator {  //Класс для форм валидации
     })
   }
 
-  enableValidation() {
-    this._setEventListeners(this.form);
+  enableValidation = () => {
+    this._form._setEventListeners;
     this._form.addEventListener('submit', (event) => {
       event.preventDefault();
 
