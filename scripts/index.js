@@ -1,6 +1,3 @@
-//TODO:
-//валидация форм
-
 import '../pages/index.css';
 
 import{initialCards} from './initial-cards.js';
@@ -74,13 +71,12 @@ function handleSubmitCard(form) {
     name: form['title'],
     link: form['link']
   };
-  console.log(inputElement)
   renderCards.addCard(cardRenderer(inputElement));
 }
 
 //Профиль
 const formValidatorProfile = new FormValidator(enableValidationConfig, formElement);
-formValidatorProfile.enableValidation();//валидация профиля(не работает)
+formValidatorProfile.enableValidation();//валидация формы профиля
 
 const popupEditProfile = new PopupWithForm(popupProfile, handleSubmitProfile);
 popupEditProfile.setEventListeners();
