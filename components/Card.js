@@ -18,14 +18,14 @@ class Card {
   _setEventListeners() {  //слушатели для карточек
     this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteCard());
     this._element.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeCard());
-    this._element.querySelector('.element__cover').addEventListener('click', (evt) => this._handleCardClick(evt));
+    this._element.querySelector('.element__cover').addEventListener('click', () => this._handleCardClick({name: this._name, link: this._link}));
   }
 
   renderCard() {  //отрисовка карточек
     this._element = this._getTemplate();
 
     const cardCover = this._element.querySelector('.element__cover');
-    const cardTitle = this._element.querySelector('.element__title')
+    const cardTitle = this._element.querySelector('.element__title');
 
     cardCover.src = this._link;
     cardTitle.textContent = this._name;
@@ -38,6 +38,7 @@ class Card {
 
   _handleDeleteCard() {//удаление карточек
     this._element.remove();
+    this._element = null;
   }
 
   _handleLikeCard() {//Лайк карточек

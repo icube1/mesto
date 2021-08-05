@@ -10,26 +10,23 @@ class FormValidator {  //Класс для форм валидации
   }
 
   //Установка состояния кнопки
-  setSubmitButtonState(_form, config) {
+  setSubmitButtonState() {
     const isValid = this._form.checkValidity();
 
     if(isValid) {
-      this._submitButton.classList.remove(config.inactiveButtonClass);
+      this._submitButton.classList.remove(this._inactiveButtonClass);
       this._submitButton.removeAttribute('disabled');
     } else {
-      this._submitButton.classList.add(config.inactiveButtonClass);
+      this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.setAttribute('disabled', 'disabled');
     }
   }
 
 //Обработчик полей ввода
-  _handleFormInput(event, config) {
-    const formInput = event.target;
-    const form = event.currentTarget;
-
-    // Меняем состояние кнопки отправки в зависимости от валидности формы
-    this.setSubmitButtonState(form, config);
-  }
+  // _handleFormInput() {
+  //   // Меняем состояние кнопки отправки в зависимости от валидности формы
+  //   this.setSubmitButtonState();
+  // }
 
   _isValid = (formInput) => {  //проверка валидности формы и установка сообщения об ошибке
     const span = this._form.querySelector(`#${formInput.name}-error`);
@@ -43,18 +40,18 @@ class FormValidator {  //Класс для форм валидации
     }
   }
 
-  setEventListeners = () => {  //слушатели для полей ввода
+  _setEventListeners = () => {  //слушатели для полей ввода
     this._formInputs.forEach((formInput) => {
       formInput.addEventListener('input', () => {
         this._isValid(formInput);
-        this.setSubmitButtonState(formInput, enableValidationConfig);
-        this._handleFormInput(formInput, enableValidationConfig)
+        this.setSubmitButtonState();
+        // this._handleFormInput()
       });
     })
   }
 
   enableValidation = () => {
-    this._form._setEventListeners;
+    this._setEventListeners();
     this._form.addEventListener('submit', (event) => {
       event.preventDefault();
 
@@ -62,12 +59,5 @@ class FormValidator {  //Класс для форм валидации
   }
 };
 
-const enableValidationConfig = {
-  form: '.popup__form',
-  input: '.popup__input',
-  inputInvalidClass: 'popup__input_invalid',
-  submitButton: '.popup__save',
-  inactiveButtonClass: 'popup__save_invalid',
-};
 
-export {FormValidator, enableValidationConfig}
+export {FormValidator}

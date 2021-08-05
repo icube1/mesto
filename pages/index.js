@@ -1,13 +1,14 @@
-import '../pages/index.css';
 
-import{initialCards} from './initial-cards.js';
-import{Card} from './Card.js';
-import{FormValidator, enableValidationConfig} from './validate.js';
-import Section from './Section.js';
-import Popup from './Popup.js';
-import PopupWithImage from './PopupWithImage.js'
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+
+import '../pages/index.css';
+import {enableValidationConfig} from '../utils/validationConfig.js';
+import{initialCards} from '../utils/initial-cards.js';
+import{Card} from '../components/Card.js';
+import{FormValidator} from '../components/validate.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js'
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.profile-popup');
@@ -31,27 +32,24 @@ const popupImagePicture = popupImage.querySelector('.popup__image');
 const buttonClosepopupImage = popupImage.querySelector('.popup__close');
 const cardTemplate = document.querySelector('.card-template').content;
 
+//Предзагруженные карточки
+const handleOpenImage = new PopupWithImage(popupImage);
+handleOpenImage.setEventListeners();
 
-function handleCardClick(evt) { //Открытие увеличенной карточки
-  const data = {
-    'name': evt.currentTarget.alt,
-    'link': evt.currentTarget.src
-  }
-
-  const handleOpenImage = new PopupWithImage(popupImage, data);
-  handleOpenImage.setEventListeners();
-  handleOpenImage.open();
+function handleCardClick(name, link) { //Открытие увеличенной карточки
+  handleOpenImage.open(name, link);
 };
-
-const renderCards = new Section({items: initialCards, renderer: cardRenderer,}, cardElements);
-
 function cardRenderer(cardItem) { //отрисовка карточки
   const card = new Card(cardItem, '.card-template', handleCardClick);
   const cardElement = card.renderCard();
   return cardElement;
 }
-renderCards.renderInitialCards();
 
+const renderCards = new Section(cardRenderer, cardElements);
+
+// renderCards.addCard(initialCards.forEach((item) => cardRenderer(item))) //Так и не понял как это правильно сделать, но к следующей итерации постараюсь разобраться
+
+renderCards.addInitialCards(initialCards);
 
 //ПОП-АПЫ:
 // Новая карточка
@@ -63,15 +61,11 @@ popupAddCard.setEventListeners();
 
 function openAddCardPopup() {
   popupAddCard.open()
-  formValidatorCard.setEventListeners();
 }
 
 function handleSubmitCard(form) {
-  const inputElement = {
-    name: form['title'],
-    link: form['link']
-  };
-  renderCards.addCard(cardRenderer(inputElement));
+  renderCards.addCard(cardRenderer(form));
+  formValidatorCard.setSubmitButtonState();
 }
 
 //Профиль
@@ -81,24 +75,20 @@ formValidatorProfile.enableValidation();//валидация формы проф
 const popupEditProfile = new PopupWithForm(popupProfile, handleSubmitProfile);
 popupEditProfile.setEventListeners();
 
-const openProfilePopup = new UserInfo(profileName, profileAbout);
+const userInfo = new UserInfo(profileName, profileAbout);
 
 function handleUserProfile() { //открытие поп-апа профиля с переносом в инпуты
   popupEditProfile.open();
-  const profile = openProfilePopup.getUserInfo();
+  const profile = userInfo.getUserInfo();
   inputFieldName.value = profile.name;
   inputFieldDesc.value = profile.about;
   formValidatorProfile.enableValidation();
 }
 function handleSubmitProfile(form) { // сабмит поп-апа профиля
-  profileName.textContent = form['name'];
-  profileAbout.textContent = form['about'];
+  userInfo.setUserInfo(form);
 }
 
 
-
+//Слушатели кнопок поп-апов
 buttonEditProfile.addEventListener('click', handleUserProfile);
 buttonAddCardPopup.addEventListener('click', openAddCardPopup);
-
-
-export {popupImagePicture, imageSubtitle, buttonCloseProfilePopup, profileName, profileAbout}

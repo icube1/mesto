@@ -1,5 +1,3 @@
-import { profileName, profileAbout } from './index.js'
-
 export default class UserInfo {
   constructor(name, about) {
     this._name = name;
@@ -14,11 +12,8 @@ export default class UserInfo {
   }
 
   setUserInfo(profile) {
-    this._name = profile.name;
-    this._about = profile.about;
-
-    profileName.textContent = profile.name;
-    profileAbout.textContent = profile.about;
+    this._name.textContent = profile.name;
+    this._about.textContent = profile.about;
 
   }
 }

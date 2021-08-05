@@ -4,7 +4,8 @@
   font-size: 12px;
   line-height: 15px;
   position: absolute;
-  top: 32px;
+  top: 27px;
   left: 0;
   z-index: 2;
+  width: 100%;
 }
