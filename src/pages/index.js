@@ -1,6 +1,6 @@
 
 
-import '../pages/index.css';
+import './index.css';
 import {enableValidationConfig} from '../utils/validationConfig.js';
 import{initialCards} from '../utils/initial-cards.js';
 import{Card} from '../components/Card.js';
@@ -45,9 +45,9 @@ function cardRenderer(cardItem) { //отрисовка карточки
   return cardElement;
 }
 
-const renderCards = new Section(cardRenderer, cardElements);
-
-// renderCards.addCard(initialCards.forEach((item) => cardRenderer(item))) //Так и не понял как это правильно сделать, но к следующей итерации постараюсь разобраться
+const renderCards = new Section((item) => {
+  renderCards.addCard(cardRenderer(item))
+}, cardElements);
 
 renderCards.addInitialCards(initialCards);
 
@@ -60,12 +60,12 @@ const popupAddCard = new PopupWithForm(popupCard, handleSubmitCard);
 popupAddCard.setEventListeners();
 
 function openAddCardPopup() {
-  popupAddCard.open()
+  popupAddCard.open();
+  formValidatorCard.resetError();
 }
 
 function handleSubmitCard(form) {
   renderCards.addCard(cardRenderer(form));
-  formValidatorCard.setSubmitButtonState();
 }
 
 //Профиль
@@ -79,10 +79,10 @@ const userInfo = new UserInfo(profileName, profileAbout);
 
 function handleUserProfile() { //открытие поп-апа профиля с переносом в инпуты
   popupEditProfile.open();
+  formValidatorProfile.resetError();
   const profile = userInfo.getUserInfo();
   inputFieldName.value = profile.name;
   inputFieldDesc.value = profile.about;
-  formValidatorProfile.enableValidation();
 }
 function handleSubmitProfile(form) { // сабмит поп-апа профиля
   userInfo.setUserInfo(form);

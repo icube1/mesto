@@ -1,6 +1,6 @@
 class Card {
 	constructor(data, cardSelector, handleCardClick) {
-		this._name = data.name;
+		this._title = data.title;
 		this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -18,7 +18,7 @@ class Card {
   _setEventListeners() {  //слушатели для карточек
     this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteCard());
     this._element.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeCard());
-    this._element.querySelector('.element__cover').addEventListener('click', () => this._handleCardClick({name: this._name, link: this._link}));
+    this._element.querySelector('.element__cover').addEventListener('click', () => this._handleCardClick({title: this._title, link: this._link}));
   }
 
   renderCard() {  //отрисовка карточек
@@ -28,8 +28,8 @@ class Card {
     const cardTitle = this._element.querySelector('.element__title');
 
     cardCover.src = this._link;
-    cardTitle.textContent = this._name;
-    cardCover.alt = this._name;
+    cardTitle.textContent = this._title;
+    cardCover.alt = this._title;
 
     this._setEventListeners();
 

@@ -33,10 +33,10 @@ class FormValidator {  //Класс для форм валидации
 
     if (!formInput.validity.valid || formInput.validity.typeMismatch) {
       span.textContent = formInput.validationMessage;
-      span.classList.add('popup__input_invalid');
+      span.classList.add(this._inputInvalidClass);
     } else {
       span.textContent = formInput.validationMessage;
-      span.classList.remove('popup__input_invalid');
+      span.classList.remove(this._inputInvalidClass);
     }
   }
 
@@ -57,6 +57,14 @@ class FormValidator {  //Класс для форм валидации
 
     })
   }
+  resetError() {
+    this._formInputs.forEach((formInput) => {
+      const span = this._form.querySelector(`#${formInput.name}-error`);
+      span.textContent = '';
+      span.classList.remove(this._inputInvalidClass);
+      });
+    this.setSubmitButtonState();
+    }
 };
 
 
