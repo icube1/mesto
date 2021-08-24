@@ -9,10 +9,10 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api';
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.profile-popup');
-const buttonCloseProfilePopup = popupProfile.querySelector('.popup__close');
 const profile = document.querySelector('.profile');
 const formElement = popupProfile.querySelector('.popup__form')
 const profileName = profile.querySelector('.profile__name');
@@ -21,16 +21,13 @@ const profileAbout = profile.querySelector('.profile__description');
 const inputFieldDesc = popupProfile.querySelector('.popup__input_field_description');
 const buttonAddCardPopup = profile.querySelector('.profile__add-card');
 const popupCard = document.querySelector('.card-popup');
-const buttonCloseCardPopup = popupCard.querySelector('.popup__close');
 const cardElements = document.querySelector('.elements');
-const cardTitle = popupCard.querySelector('.popup__input_field_name');
-const cardImage = popupCard.querySelector('.popup__input_field_description');
 const cardElement = popupCard.querySelector('.popup__form');
 const popupImage = document.querySelector('.image-popup');
-const imageSubtitle = document.querySelector('.popup__subtitle');
-const popupImagePicture = popupImage.querySelector('.popup__image');
-const buttonClosepopupImage = popupImage.querySelector('.popup__close');
-const cardTemplate = document.querySelector('.card-template').content;
+const apiInfo = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-27/',
+  token: '26c8d168-5e2f-4321-b420-05dcb41e9965'
+}
 
 //Предзагруженные карточки
 const handleOpenImage = new PopupWithImage(popupImage);
@@ -49,7 +46,21 @@ const renderCards = new Section((item) => {
   renderCards.addCard(cardRenderer(item))
 }, cardElements);
 
-renderCards.addInitialCards(initialCards);
+
+const api = new Api({
+  baseUrl: apiInfo.url,
+  headers: {
+    authorization: apiInfo.token,
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getData().then(data => {
+  const [cards, userInfo ] = data;
+  renderCards.addInitialCards(cards);
+
+})
+
 
 //ПОП-АПЫ:
 // Новая карточка
@@ -92,3 +103,13 @@ function handleSubmitProfile(form) { // сабмит поп-апа профил�
 //Слушатели кнопок поп-апов
 buttonEditProfile.addEventListener('click', handleUserProfile);
 buttonAddCardPopup.addEventListener('click', openAddCardPopup);
+
+// fetch('https://mesto.nomoreparties.co/v1/cohort-27/cards', {
+//   headers: {
+//     authorization: '26c8d168-5e2f-4321-b420-05dcb41e9965'
+//   }
+// })
+//   .then(res => res.json())
+//   .then((cards) => {
+//     return cards;
+//   });
