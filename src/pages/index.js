@@ -2,7 +2,6 @@
 
 import './index.css';
 import {enableValidationConfig} from '../utils/validationConfig.js';
-import{initialCards} from '../utils/initial-cards.js';
 import{Card} from '../components/Card.js';
 import{FormValidator} from '../components/validate.js';
 import Section from '../components/Section.js';
@@ -20,6 +19,7 @@ const inputFieldName = popupProfile.querySelector('.popup__input_field_name');
 const profileAbout = profile.querySelector('.profile__description');
 const inputFieldDesc = popupProfile.querySelector('.popup__input_field_description');
 const buttonAddCardPopup = profile.querySelector('.profile__add-card');
+const profileAvatar = profile.querySelector('.profile__avatar');
 const popupCard = document.querySelector('.card-popup');
 const cardElements = document.querySelector('.elements');
 const cardElement = popupCard.querySelector('.popup__form');
@@ -28,6 +28,15 @@ const apiInfo = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-27/',
   token: '26c8d168-5e2f-4321-b420-05dcb41e9965'
 }
+
+//TODO:
+//Отображение количества лайков
+//попап удаления
+//Удаление карточки
+//постановка лайка через PUT
+//удаление лайка через DELETE
+//обновление аватара
+//Лоадеры для всех форм
 
 //Предзагруженные карточки
 const handleOpenImage = new PopupWithImage(popupImage);
@@ -47,21 +56,6 @@ const renderCards = new Section((item) => {
 }, cardElements);
 
 
-const api = new Api({
-  baseUrl: apiInfo.url,
-  headers: {
-    authorization: apiInfo.token,
-    'Content-Type': 'application/json'
-  }
-});
-
-api.getData().then(data => {
-  const [cards, userInfo ] = data;
-  renderCards.addInitialCards(cards);
-
-})
-
-
 //ПОП-АПЫ:
 // Новая карточка
 const formValidatorCard = new FormValidator(enableValidationConfig, cardElement);
@@ -77,6 +71,7 @@ function openAddCardPopup() {
 
 function handleSubmitCard(form) {
   renderCards.addCard(cardRenderer(form));
+  api.addCard(form)
 }
 
 //Профиль
@@ -86,23 +81,44 @@ formValidatorProfile.enableValidation();//валидация формы проф
 const popupEditProfile = new PopupWithForm(popupProfile, handleSubmitProfile);
 popupEditProfile.setEventListeners();
 
-const userInfo = new UserInfo(profileName, profileAbout);
+const userProfile = new UserInfo(profileName, profileAbout, profileAvatar);
 
 function handleUserProfile() { //открытие поп-апа профиля с переносом в инпуты
   popupEditProfile.open();
   formValidatorProfile.resetError();
-  const profile = userInfo.getUserInfo();
+  const profile = userProfile.getUserInfo();
   inputFieldName.value = profile.name;
   inputFieldDesc.value = profile.about;
 }
 function handleSubmitProfile(form) { // сабмит поп-апа профиля
-  userInfo.setUserInfo(form);
+  api.updateProfile(form);
+  userProfile.setUserInfo(form);
 }
+
+//API
+const api = new Api({
+  baseUrl: apiInfo.url,
+  headers: {
+    authorization: apiInfo.token,
+    'Content-Type': 'application/json'
+  }
+});
+
+api.getData().then(data => {
+  const [cards, userInfo ] = data;
+  renderCards.addInitialCards(cards);
+  userProfile.setUserInfo(userInfo);
+  userProfile.setUserAvatar(userInfo)
+})
+
 
 
 //Слушатели кнопок поп-апов
 buttonEditProfile.addEventListener('click', handleUserProfile);
 buttonAddCardPopup.addEventListener('click', openAddCardPopup);
+
+
+//Проверка работы сервера
 
 // fetch('https://mesto.nomoreparties.co/v1/cohort-27/cards', {
 //   headers: {
@@ -111,5 +127,5 @@ buttonAddCardPopup.addEventListener('click', openAddCardPopup);
 // })
 //   .then(res => res.json())
 //   .then((cards) => {
-//     return cards;
+//     console.log(cards);
 //   });

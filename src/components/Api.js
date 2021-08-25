@@ -18,9 +18,32 @@ export default class Api {
     .then(this._handleResponse);
   }
 
+  updateProfile(data) {
+    return fetch(`${this._baseUrl}users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about,
+      })
+    })
+      .then(this._handleResponse);
+    }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       headers: this._headers
+    })
+      .then(this._handleResponse);
+  }
+  addCard(data) {
+    return fetch(`${this._baseUrl}cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
     })
     .then(this._handleResponse);
   }
