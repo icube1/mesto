@@ -5,8 +5,11 @@ export default class Section{
   }
   addCard(card) {
     this._container.append(card);
-    
   }
+addCustomCard(card) {
+  this._container.prepend(card);
+}
+
   addInitialCards(cards) {
     cards.forEach((item) => {
      this._renderer(item)

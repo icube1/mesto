@@ -15,7 +15,7 @@ export default class Api {
     return fetch(`${this._baseUrl}users/me`, {
       headers: this._headers
     })
-    .then(this._handleResponse);
+    .then((response) => this._handleResponse(response));
   }
 
   updateProfile(data) {
@@ -27,14 +27,14 @@ export default class Api {
         about: data.about,
       })
     })
-      .then(this._handleResponse);
+    .then((response) => this._handleResponse(response));
     }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       headers: this._headers
     })
-      .then(this._handleResponse);
+    .then((response) => this._handleResponse(response));
   }
   addCard(data) {
     return fetch(`${this._baseUrl}cards`, {
@@ -45,7 +45,7 @@ export default class Api {
         link: data.link
       })
     })
-    .then(this._handleResponse);
+    .then((response) => this._handleResponse(response));
   }
   getData() {
     return Promise.all([this.getInitialCards(), this.getProfile()])
@@ -56,6 +56,6 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
     })
-    .then(this._handleResponse);
+    .then((response) => this._handleResponse(response));
   }
 }

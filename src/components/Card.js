@@ -1,9 +1,14 @@
 class Card {
-	constructor(data, cardSelector, handleCardClick) {
+	constructor(data, cardSelector, handleCardClick, selfId) {
+    this._data = data;
 		this._title = data.name;
 		this._link = data.link;
     this._likes = data.likes;
     this._likeQuantity = data.likes.length;
+    this._id = data._id;
+    this._selfId = selfId;
+    this._ownerId = data.owner._id;
+
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
 	}
@@ -28,16 +33,25 @@ class Card {
 
     const cardCover = this._element.querySelector('.element__cover');
     const cardTitle = this._element.querySelector('.element__title');
-    const cardLikes = this._element.querySelector('.element__like-button_quantity')
+    const cardLikes = this._element.querySelector('.element__like-button_quantity');
+    const cardDeleteButton = this._element.querySelector('.element__delete-button');
 
     cardCover.src = this._link;
     cardTitle.textContent = this._title;
     cardCover.alt = this._title;
-    cardLikes.textContent = this._likeQuantity;
 
+    if (this._ownerId !== this._selfId) {
+      cardDeleteButton.style.visibility = "hidden";
+    }
+    if(this._likes){
+    cardLikes.textContent = this._likeQuantity
+  }
     this._setEventListeners();
-
     return this._element;
+  }
+
+  setLikes() {
+    cardLikes.textContent = this._likeQuantity;
   }
 
   _handleDeleteCard() {//удаление карточек
