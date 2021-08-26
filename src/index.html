@@ -92,6 +92,16 @@
     </div>
   </div>
 
+  <div class="delete-popup popup">
+    <div class="popup__delete-container">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button aria-label="закрыть" type="button" class="popup__close"></button>
+      <button disabled type="submit" class="popup__save">Да</button>
+    </div>
+    </div>
+  </div>
+
+
   <template class="card-template">
     <article class="element">
       <img src=<%=require("./images/profile__avatar.webp")%>
@@ -103,7 +113,7 @@
         <h2 class="element__title"></h2>
         <div class="element__like-container">
         <button aria-label="понравилось" type="button" class="element__like-button"></button>
-        <p class="element__like-button_quantity"><3</p></div>
+        <p class="element__like-button_quantity">1</p></div>
       </div>
     </article>
   </template>

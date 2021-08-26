@@ -50,4 +50,12 @@ export default class Api {
   getData() {
     return Promise.all([this.getInitialCards(), this.getProfile()])
   }
+
+  addLike(data) {
+    return fetch(`${this._baseUrl}cards/likes/${data}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    .then(this._handleResponse);
+  }
 }

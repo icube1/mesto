@@ -5,6 +5,7 @@ export default class Section{
   }
   addCard(card) {
     this._container.append(card);
+    
   }
   addInitialCards(cards) {
     cards.forEach((item) => {

@@ -2,6 +2,8 @@ class Card {
 	constructor(data, cardSelector, handleCardClick) {
 		this._title = data.name;
 		this._link = data.link;
+    this._likes = data.likes;
+    this._likeQuantity = data.likes.length;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
 	}
@@ -26,10 +28,12 @@ class Card {
 
     const cardCover = this._element.querySelector('.element__cover');
     const cardTitle = this._element.querySelector('.element__title');
+    const cardLikes = this._element.querySelector('.element__like-button_quantity')
 
     cardCover.src = this._link;
     cardTitle.textContent = this._title;
     cardCover.alt = this._title;
+    cardLikes.textContent = this._likeQuantity;
 
     this._setEventListeners();
 

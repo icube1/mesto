@@ -1,5 +1,3 @@
-
-
 import './index.css';
 import {enableValidationConfig} from '../utils/validationConfig.js';
 import{Card} from '../components/Card.js';
@@ -30,7 +28,6 @@ const apiInfo = {
 }
 
 //TODO:
-//Отображение количества лайков
 //попап удаления
 //Удаление карточки
 //постановка лайка через PUT
@@ -120,12 +117,12 @@ buttonAddCardPopup.addEventListener('click', openAddCardPopup);
 
 //Проверка работы сервера
 
-// fetch('https://mesto.nomoreparties.co/v1/cohort-27/cards', {
-//   headers: {
-//     authorization: '26c8d168-5e2f-4321-b420-05dcb41e9965'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((cards) => {
-//     console.log(cards);
-//   });
+fetch('https://mesto.nomoreparties.co/v1/cohort-27/cards', {
+  headers: {
+    authorization: '26c8d168-5e2f-4321-b420-05dcb41e9965'
+  }
+})
+  .then(res => res.json())
+  .then((cards) => {
+    console.log(cards);
+  });
