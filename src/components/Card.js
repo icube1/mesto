@@ -1,17 +1,25 @@
 class Card {
-	constructor(data, cardSelector, handleCardClick, selfId) {
+	constructor(data, cardSelector, handleCardClick, selfId, handleDeleteButton, popupDeleteConfirmation) {
     this._data = data;
 		this._title = data.name;
 		this._link = data.link;
     this._likes = data.likes;
     this._likeQuantity = data.likes.length;
     this._id = data._id;
-    this._selfId = selfId;
     this._ownerId = data.owner._id;
+
+    this._selfId = selfId;
 
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+
+    this._handleDeleteButton = handleDeleteButton;
+    this._popupDeleteConfirmation = popupDeleteConfirmation
 	}
+
+  cardId() {
+    return this._id
+  }
 
   _getTemplate() {
     const card = document
@@ -23,7 +31,7 @@ class Card {
     return card;
   }
   _setEventListeners() {  //слушатели для карточек
-    this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteCard());
+    this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteConfirmation());
     this._element.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeCard());
     this._element.querySelector('.element__cover').addEventListener('click', () => this._handleCardClick({title: this._title, link: this._link}));
   }
@@ -41,8 +49,9 @@ class Card {
     cardCover.alt = this._title;
 
     if (this._ownerId !== this._selfId) {
-      cardDeleteButton.style.visibility = "hidden";
+      cardDeleteButton.style.display = "none";
     }
+
     if(this._likes){
     cardLikes.textContent = this._likeQuantity
   }
@@ -54,13 +63,18 @@ class Card {
     cardLikes.textContent = this._likeQuantity;
   }
 
+  _handleDeleteConfirmation() {
+    this._popupDeleteConfirmation.setNewHandler(() => this._handleDeleteCard());
+    this._popupDeleteConfirmation.open()
+  }
+
   _handleDeleteCard() {//удаление карточек
-    this._element.remove();
-    this._element = null;
+    this._handleDeleteButton(this._id, this._element);
   }
 
   _handleLikeCard() {//Лайк карточек
     this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
+    console.log(this._selfId)
   }
 }
 export {Card}

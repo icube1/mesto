@@ -18,6 +18,13 @@ export default class Api {
     .then((response) => this._handleResponse(response));
   }
 
+  setAvatar(data) {
+    return  fetch(`${this._baseUrl}cards`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+  }).then((response) => this._handleResponse(response));}
+
   updateProfile(data) {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
@@ -48,12 +55,20 @@ export default class Api {
     .then((response) => this._handleResponse(response));
   }
   getData() {
-    return Promise.all([this.getInitialCards(), this.getProfile()])
+    return Promise.all([ this.getProfile(), this.getInitialCards() ])
   }
 
   addLike(data) {
     return fetch(`${this._baseUrl}cards/likes/${data}`, {
       method: 'PUT',
+      headers: this._headers,
+    })
+    .then((response) => this._handleResponse(response));
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}cards/${id}`, {
+      method: 'DELETE',
       headers: this._headers,
     })
     .then((response) => this._handleResponse(response));
