@@ -31,9 +31,6 @@ import {
 
 
 //TODO:
-//Удаление карточки
-//постановка лайка через PUT
-//удаление лайка через DELETE
 //обновление аватара
 //Лоадеры для всех форм
 
@@ -76,7 +73,7 @@ function cardRenderer(cardItem) { //отрисовка карточки
     handleCardClick,
     userProfile.getUserInfo().id,
     handleDeleteButton,
-    // () => handleLikeClick(card, cardItem),
+    handleLikeClick,
     popupDeleteConfirmation
     );
   const cardElement = card.renderCard();
@@ -92,7 +89,7 @@ const renderCards = new Section((item) => {
 const popupDeleteConfirmation = new PopupDeleteConfirmation(popupDelete, handleDeleteButton);
 popupDeleteConfirmation.setEventListeners();
 
-function handleDeleteButton(cardId, card) {
+function handleDeleteButton(cardId, card) {   //Удаление карточки
   api.deleteCard(cardId).then((res) => {
     card.remove();
     popupDeleteConfirmation.close();
@@ -102,6 +99,23 @@ function handleDeleteButton(cardId, card) {
   })
   .finally(() => popupDeleteConfirmation.resetButtonState())
 }
+
+//Лайк карточки
+function handleLikeClick(target, id, likeCounter) {
+  if(target.classList.contains('element__like-button_active')){
+    api.addLike(id).then((res) => {
+      likeCounter.textContent = res.likes.length;
+    })
+    .catch((err) => console.log(err.toString()))
+  } else {
+    api.removeLike(id)
+    .then((res) => likeCounter.textContent = res.likes.length
+    )
+    .catch((err) => console.log(err.toString()))
+  }
+
+}
+
 
 // Новая карточка
 const formValidatorCard = new FormValidator(enableValidationConfig, cardElement);

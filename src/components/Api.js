@@ -58,9 +58,17 @@ export default class Api {
     return Promise.all([ this.getProfile(), this.getInitialCards() ])
   }
 
-  addLike(data) {
-    return fetch(`${this._baseUrl}cards/likes/${data}`, {
+  addLike(id) {
+    return fetch(`${this._baseUrl}cards/likes/${id}`, {
       method: 'PUT',
+      headers: this._headers,
+    })
+    .then((response) => this._handleResponse(response));
+  }
+
+  removeLike(id) {
+    return fetch(`${this._baseUrl}cards/likes/${id}`, {
+      method: 'DELETE',
       headers: this._headers,
     })
     .then((response) => this._handleResponse(response));

@@ -50,4 +50,7 @@ export default class Popup {
   setEventListeners() {
     this._popupButtonClose.addEventListener('click', (evt) => this._handleCloseButton(evt));
   }
+  resetButtonText(){
+        this._submitButton.textContent = this._defaultButtonText;
+}
 }

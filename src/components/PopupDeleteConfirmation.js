@@ -23,6 +23,11 @@ export default class PopupDeleteConfirmation extends Popup {
     })
   }
 
+  close() {
+    super.close();
+    this._form.reset();
+    this.resetButtonText();
+}
 
 }
 
