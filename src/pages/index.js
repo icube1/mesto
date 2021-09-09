@@ -1,7 +1,7 @@
 import './index.css';
 import {enableValidationConfig} from '../utils/validationConfig.js';
 import{Card} from '../components/Card.js';
-import{FormValidator} from '../components/validate.js';
+import{FormValidator} from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -13,7 +13,7 @@ import {
   buttonEditProfile,
   popupProfile,
   profile,
-  formElement,
+  profileFormElement,
   profileName,
   inputFieldName,
   profileAbout,
@@ -34,7 +34,7 @@ import {
 
 //Профиль
 
-const formValidatorProfile = new FormValidator(enableValidationConfig, formElement);
+const formValidatorProfile = new FormValidator(enableValidationConfig, profileFormElement);
 formValidatorProfile.enableValidation();//валидация формы профиля
 
 const popupEditProfile = new PopupWithForm(popupProfile, handleSubmitProfile);
@@ -50,7 +50,11 @@ function handleUserProfile() { //открытие поп-апа профиля �
   inputFieldDesc.value = profile.about;
 }
 function handleSubmitProfile(form) { // сабмит поп-апа профиля
-  api.updateProfile(form).then((res) => userProfile.setUserInfo(res))
+  api.updateProfile(form)
+  .then((res) => userProfile.setUserInfo(res))
+  .then(popupEditProfile.close())
+  .catch((err) => console.log(err))
+  .finally(popupEditProfile.resetButtonText())
 }
 
 //Изменеие аватара
@@ -70,7 +74,9 @@ function handleEditAvatar(form) {
   .then((data) => {
     userProfile.setUserInfo(data);
   })
+  .then((res) => popupEditAvatar.close())
   .catch((err) => console.log(err))
+  .finally(popupEditAvatar.resetButtonText())
 }
 
 //Предзагруженные карточки
@@ -116,14 +122,20 @@ function handleDeleteButton(cardId, card) {   //Удаление карточк�
 
 //Лайк карточки
 function handleLikeClick(target, id, likeCounter) {
-  if(target.classList.contains('element__like-button_active')){
-    api.addLike(id).then((res) => {
+
+  if(!target.classList.contains('element__like-button_active')){
+    api.addLike(id)
+    .then((res) => {
       likeCounter.textContent = res.likes.length;
+      target.classList.toggle('element__like-button_active');
     })
     .catch((err) => console.log(err.toString()))
   } else {
     api.removeLike(id)
-    .then((res) => likeCounter.textContent = res.likes.length
+    .then((res) => {
+      likeCounter.textContent = res.likes.length;
+      target.classList.toggle('element__like-button_active');
+    }
     )
     .catch((err) => console.log(err.toString()))
   }
@@ -147,8 +159,10 @@ function handleSubmitCard(form) {
     .then((res) => {
       renderCards.addCustomCard(cardRenderer(res))
     })
+    .then((popupAddCard.close()))
     .catch((err) => console.log('Ошибка, рвать её мать!' + err.toString()))
-}
+    .finally(popupAddCard.resetButtonText())
+    }
 
 
 //API

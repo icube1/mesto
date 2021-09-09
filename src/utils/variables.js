@@ -1,7 +1,7 @@
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('.profile-popup');
 const profile = document.querySelector('.profile');
-const formElement = popupProfile.querySelector('.popup__form')
+const profileFormElement = popupProfile.querySelector('.popup__form')
 const profileName = profile.querySelector('.profile__name');
 const inputFieldName = popupProfile.querySelector('.popup__input_field_name');
 const profileAbout = profile.querySelector('.profile__description');
@@ -21,5 +21,5 @@ const apiInfo = {
 }
 let userId = null;
 
-export {buttonEditProfile, popupProfile, profile, formElement, profileName, inputFieldName, profileAbout,
+export {buttonEditProfile, popupProfile, profile, profileFormElement, profileName, inputFieldName, profileAbout,
   inputFieldDesc, buttonAddCardPopup, profileAvatar, popupCard, cardElements, cardElement, popupImage, apiInfo, userId, popupDelete, editAvatar, formEditAvatar}

@@ -73,14 +73,14 @@ class Card {
     this._handleDeleteButton(this._id, this._element);
   }
 
-  _handleLikeCard() {//Лайк карточек
+  handleLikeCard() {//Лайк карточек
     this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
   }
 
   _setEventListeners() {  //слушатели для карточек
     this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteConfirmation());
     this._element.querySelector('.element__like-button').addEventListener('click', (evt) => {
-      this._handleLikeCard();
+      // this._handleLikeCard();
       this._handleLikeClick(evt.target, this._id, this._likeCounter)
     });
     this._element.querySelector('.element__cover').addEventListener('click', () => this._handleCardClick({title: this._title, link: this._link}));
