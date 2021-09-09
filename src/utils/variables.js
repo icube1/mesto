@@ -13,6 +13,7 @@ const cardElements = document.querySelector('.elements');
 const cardElement = popupCard.querySelector('.popup__form');
 const popupImage = document.querySelector('.image-popup');
 const popupDelete = document.querySelector('.delete-popup');
+const editAvatar = document.querySelector('.avatar-popup')
 const apiInfo = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-27/',
   token: '26c8d168-5e2f-4321-b420-05dcb41e9965'
@@ -20,4 +21,4 @@ const apiInfo = {
 let userId = null;
 
 export {buttonEditProfile, popupProfile, profile, formElement, profileName, inputFieldName, profileAbout,
-  inputFieldDesc, buttonAddCardPopup, profileAvatar, popupCard, cardElements, cardElement, popupImage, apiInfo, userId, popupDelete}
+  inputFieldDesc, buttonAddCardPopup, profileAvatar, popupCard, cardElements, cardElement, popupImage, apiInfo, userId, popupDelete, editAvatar}

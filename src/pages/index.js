@@ -25,7 +25,8 @@ import {
   cardElements,
   popupImage,
   apiInfo,
-  popupDelete
+  popupDelete,
+  editAvatar
 } from '../utils/variables.js'
 
 
@@ -56,6 +57,24 @@ function handleUserProfile() { //открытие поп-апа профиля �
 function handleSubmitProfile(form) { // сабмит поп-апа профиля
   api.updateProfile(form);
   userProfile.setUserInfo(form);
+}
+//валидация
+
+//Изменеие аватара
+const popupEditAvatar = new PopupWithForm(editAvatar, handleEditAvatar)
+popupEditAvatar.setEventListeners();
+
+
+function handleAvatar() {
+  popupEditAvatar.open();
+}
+
+function handleEditAvatar(form) {
+  api.editAvatar(form)
+  .then((data) => {
+    userProfile.setUserInfo(data);
+  })
+  .catch((err) => console.log(err))
 }
 
 //Предзагруженные карточки
@@ -116,7 +135,6 @@ function handleLikeClick(target, id, likeCounter) {
 
 }
 
-
 // Новая карточка
 const formValidatorCard = new FormValidator(enableValidationConfig, cardElement);
 formValidatorCard.enableValidation();// валидация поп-апа карточки
@@ -145,14 +163,6 @@ const api = new Api({
   }});
 
 
-// function getProfileInfo() {
-//   return api.getProfile()
-// }
-
-// function getCardsInfo() {
-//   return api.getInitialCards()
-// }
-
 api.getData().then(data => {
   const [ userInfo, cards  ] = data;
   userProfile.setUserInfo(userInfo);
@@ -163,24 +173,12 @@ api.getData().then(data => {
 
 .catch((err) => console.log('Ошибка, рвать её мать!' + err.toString()))
 
-// Promise.all([getProfileInfo(), getCardsInfo()]).then((values) => {
-//   const userProfileData = values[0];
-//   const initialCardsData = values[1];
-//   const userInfo = {
-//     'name': userProfileData.name,
-//     'about': userProfileData.about,
-//     'avatar': userProfileData.avatar,
-//     'id': userProfileData._id
-//   }
-//   userProfile.setUserInfo(userInfo);
-//   renderCards.addInitialCards(initialCardsData);
-// }).catch((err) => console.log('Ошибка, рвать её мать!' + err.toString()))
-
 
 
 //Слушатели кнопок поп-апов
 buttonEditProfile.addEventListener('click', handleUserProfile);
 buttonAddCardPopup.addEventListener('click', openAddCardPopup);
+profileAvatar.addEventListener('click', handleAvatar);
 
 
 //Проверка работы сервера

@@ -19,10 +19,17 @@
 
   <main class="main">
     <section class="profile">
+      <div class="profile__avatar-container">
         <img src=<%=require("./images/profile__avatar.webp")%>
         alt="Аватар пользователя"
         class="profile__avatar"
         />
+        <img src=<%=require("./images/profile__avatar-edit.svg")%>
+        alt="Изменить аватар"
+        class="profile__avatar-edit"
+       />
+      </div>
+
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Рик Эстли</h1>
@@ -103,6 +110,20 @@
     </div>
   </div>
 
+  <div class="popup avatar-popup">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form novalidate name="edit-avatar" class="popup__form">
+        <label class="popup__label">
+          <input required placeholder="Ссылка на картинку" name="avatar" type="url"
+            class="popup__input popup__input_field_description" minlength="2" maxlength="200" autocomplete="off">
+          <span id="avatar-error" class="error"></span>
+        </label>
+        <button type="submit" class="popup__save">Сохранить</button>
+      </form>
+      <button aria-label="закрыть" type="button" class="popup__close"></button>
+    </div>
+  </div>
 
   <template class="card-template">
     <article class="element">
