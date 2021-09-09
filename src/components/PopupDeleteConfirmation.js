@@ -17,7 +17,6 @@ export default class PopupDeleteConfirmation extends Popup {
 
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      console.log(this._form)
       this._formSubmit.textContent = 'Удаление...'
       this._submit();
     })
@@ -26,7 +25,7 @@ export default class PopupDeleteConfirmation extends Popup {
   close() {
     super.close();
     this._form.reset();
-    this.resetButtonText();
+    this._formSubmit.textContent = 'Да';
 }
 
 }

@@ -72,9 +72,9 @@
       <h2 class="popup__title">Новое место</h2>
       <form novalidate name="edit-card" class="popup__form">
         <label class="popup__label">
-          <input required placeholder="Название" name="name" type="text" class="popup__input popup__input_field_name"
+          <input required placeholder="Название" name="title" type="text" class="popup__input popup__input_field_name"
             minlength="2" maxlength="40" autocomplete="off">
-          <span id="name-error" class="error"></span>
+          <span id="title-error" class="error"></span>
         </label>
         <label class="popup__label">
           <input type="url" required placeholder="Ссылка на картинку" name="link"
@@ -107,7 +107,6 @@
       </form>
       <button aria-label="закрыть" type="button" class="popup__close"></button>
     </div>
-    </div>
   </div>
 
   <div class="popup avatar-popup">
@@ -119,7 +118,7 @@
             class="popup__input popup__input_field_description" minlength="2" maxlength="200" autocomplete="off">
           <span id="avatar-error" class="error"></span>
         </label>
-        <button type="submit" class="popup__save">Сохранить</button>
+        <button disabled type="submit" class="popup__save">Сохранить</button>
       </form>
       <button aria-label="закрыть" type="button" class="popup__close"></button>
     </div>

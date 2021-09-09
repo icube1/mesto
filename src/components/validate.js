@@ -30,7 +30,6 @@ class FormValidator {  //Класс для форм валидации
 
   _isValid = (formInput) => {  //проверка валидности формы и установка сообщения об ошибке
     const span = this._form.querySelector(`#${formInput.name}-error`);
-
     if (!formInput.validity.valid || formInput.validity.typeMismatch) {
       span.textContent = formInput.validationMessage;
       span.classList.add(this._inputInvalidClass);
@@ -60,6 +59,7 @@ class FormValidator {  //Класс для форм валидации
   resetError() {
     this._formInputs.forEach((formInput) => {
       const span = this._form.querySelector(`#${formInput.name}-error`);
+      
       span.textContent = '';
       span.classList.remove(this._inputInvalidClass);
       });

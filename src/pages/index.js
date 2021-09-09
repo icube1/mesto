@@ -26,14 +26,9 @@ import {
   popupImage,
   apiInfo,
   popupDelete,
-  editAvatar
+  editAvatar,
+  formEditAvatar
 } from '../utils/variables.js'
-
-
-
-//TODO:
-//обновление аватара
-//Лоадеры для всех форм
 
 
 
@@ -55,17 +50,18 @@ function handleUserProfile() { //открытие поп-апа профиля �
   inputFieldDesc.value = profile.about;
 }
 function handleSubmitProfile(form) { // сабмит поп-апа профиля
-  api.updateProfile(form);
-  userProfile.setUserInfo(form);
+  api.updateProfile(form).then((res) => userProfile.setUserInfo(res))
 }
-//валидация
 
 //Изменеие аватара
 const popupEditAvatar = new PopupWithForm(editAvatar, handleEditAvatar)
 popupEditAvatar.setEventListeners();
 
+const formValidatorAvatar = new FormValidator(enableValidationConfig, formEditAvatar)
+formValidatorAvatar.enableValidation();
 
 function handleAvatar() {
+  formValidatorAvatar.resetError()
   popupEditAvatar.open();
 }
 
@@ -116,7 +112,6 @@ function handleDeleteButton(cardId, card) {   //Удаление карточк�
   .catch((err) => {
     console.log(err.toString())
   })
-  .finally(() => popupDeleteConfirmation.resetButtonState())
 }
 
 //Лайк карточки
@@ -154,6 +149,8 @@ function handleSubmitCard(form) {
     })
     .catch((err) => console.log('Ошибка, рвать её мать!' + err.toString()))
 }
+
+
 //API
 const api = new Api({
   baseUrl: apiInfo.url,
@@ -183,12 +180,12 @@ profileAvatar.addEventListener('click', handleAvatar);
 
 //Проверка работы сервера
 
-fetch('https://mesto.nomoreparties.co/v1/cohort-27/cards', {
-  headers: {
-    authorization: '26c8d168-5e2f-4321-b420-05dcb41e9965'
-  }
-})
-  .then(res => res.json())
-  .then((cards) => {
-    console.log(cards);
-  });
+// fetch('https://mesto.nomoreparties.co/v1/cohort-27/cards', {
+//   headers: {
+//     authorization: '26c8d168-5e2f-4321-b420-05dcb41e9965'
+//   }
+// })
+//   .then(res => res.json())
+//   .then((cards) => {
+//     console.log(cards);
+//   });

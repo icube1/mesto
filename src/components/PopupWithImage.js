@@ -5,6 +5,7 @@ export default class PopupWithImage extends Popup {
     super(popup);
     this._link = this._popup.querySelector('.popup__image');
     this._title = this._popup.querySelector('.popup__subtitle');
+    this._popupForm = this._popup.querySelector('.popup__form');
   }
 
   open(data) {
@@ -13,4 +14,6 @@ export default class PopupWithImage extends Popup {
     this._title.textContent = data.title;
     super.open()
   }
+
+  
 }
