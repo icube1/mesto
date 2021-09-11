@@ -1,5 +1,5 @@
 class Card {
-	constructor(data, cardSelector, handleCardClick, selfId, handleDeleteButton, handleLikeClick, popupDeleteConfirmation) {
+	constructor({data, cardSelector, handleCardClick, selfId, handleDeleteButton, handleLikeClick, popupDeleteConfirmation}) {
     this._data = data;
 		this._title = data.name;
 		this._link = data.link;
@@ -21,6 +21,10 @@ class Card {
 
   cardId() {
     return this._id
+  }
+
+  removeCard() {
+    this._element.remove()
   }
 
   _getTemplate() {
@@ -55,13 +59,18 @@ class Card {
     if(this._likes.some((element) => {return (this._selfId === element._id)})){
       cardLike.classList.add('element__like-button_active')
   }
-  cardLikes.textContent = this._likeQuantity
+  cardLikes.textContent = this._likeQuantity;
     this._setEventListeners();
     return this._element;
   }
 
-  setLikes() {
-    cardLikes.textContent = this._likeQuantity;
+  setLikes(response) {
+    if(response) {
+      this._likeCounter.textContent = response.likes.length;
+    }
+    else {
+      cardLikes.textContent = this._likeQuantity;
+    }
   }
 
   _handleDeleteConfirmation() {
@@ -79,14 +88,9 @@ class Card {
 
   _setEventListeners() {  //слушатели для карточек
     this._element.querySelector('.element__delete-button').addEventListener('click', () => this._handleDeleteConfirmation());
-    this._element.querySelector('.element__like-button').addEventListener('click', (evt) => {
-      // this._handleLikeCard();
-      this._handleLikeClick(evt.target, this._id, this._likeCounter)
-    });
+    this._element.querySelector('.element__like-button').addEventListener('click', (evt) => this._handleLikeClick(evt.target, this._id, this._likeCounter, this));
     this._element.querySelector('.element__cover').addEventListener('click', () => this._handleCardClick({title: this._title, link: this._link}));
-  }
-
-}
+}}
 export {Card}
 
 

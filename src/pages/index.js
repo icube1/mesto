@@ -88,15 +88,15 @@ function handleCardClick(name, link) { //Открытие увеличенной
 };
 
 function cardRenderer(cardItem) { //отрисовка карточки
-  const card = new Card(
-    cardItem,
-    '.card-template',
-    handleCardClick,
-    userProfile.getUserInfo().id,
-    handleDeleteButton,
-    handleLikeClick,
-    popupDeleteConfirmation
-    );
+  const card = new Card({
+    data: cardItem,
+    cardSelector: '.card-template',
+    handleCardClick: handleCardClick,
+    selfId: userProfile.getUserInfo().id,
+    handleDeleteButton: handleDeleteButton,
+    handleLikeClick: handleLikeClick,
+    popupDeleteConfirmation: popupDeleteConfirmation
+    });
   const cardElement = card.renderCard();
   return cardElement;
 }
@@ -118,28 +118,26 @@ function handleDeleteButton(cardId, card) {   //Удаление карточк�
   .catch((err) => {
     console.log(err.toString())
   })
-}
+  }
 
 //Лайк карточки
-function handleLikeClick(target, id, likeCounter) {
-
+function handleLikeClick(target, id, likeCounter, card) {
   if(!target.classList.contains('element__like-button_active')){
     api.addLike(id)
     .then((res) => {
-      likeCounter.textContent = res.likes.length;
-      target.classList.toggle('element__like-button_active');
+      card.setLikes(res, likeCounter);
+      card.handleLikeCard();
     })
     .catch((err) => console.log(err.toString()))
   } else {
     api.removeLike(id)
     .then((res) => {
-      likeCounter.textContent = res.likes.length;
-      target.classList.toggle('element__like-button_active');
+      card.setLikes(res, likeCounter);
+      card.handleLikeCard();
     }
     )
     .catch((err) => console.log(err.toString()))
   }
-
 }
 
 // Новая карточка
@@ -178,8 +176,6 @@ api.getData().then(data => {
   const [ userInfo, cards  ] = data;
   userProfile.setUserInfo(userInfo);
   renderCards.addInitialCards(cards);
-  // console.log(userInfo)
-  // console.log(userProfile)
 }).then()
 
 .catch((err) => console.log('Ошибка, рвать её мать!' + err.toString()))
