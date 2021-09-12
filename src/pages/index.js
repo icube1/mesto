@@ -112,7 +112,7 @@ popupDeleteConfirmation.setEventListeners();
 
 function handleDeleteButton(cardId, card) {   //Удаление карточки
   api.deleteCard(cardId).then((res) => {
-    card.remove();
+    card.removeCard();
     popupDeleteConfirmation.close();
   })
   .catch((err) => {
