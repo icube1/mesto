@@ -79,7 +79,7 @@ class Card {
   }
 
   _handleDeleteCard() {//удаление карточек
-    this._handleDeleteButton(this._id, this._element);
+    this._handleDeleteButton(this._id, this);
   }
 
   handleLikeCard() {//Лайк карточек
